@@ -1,13 +1,12 @@
-# # two inputs/one output
-
+# ## scatter on inputs/one output
 # The CWL includes: 
-# - two input parameters of type `Directory`
+# - scatter on an input parameter of type `Directory[]`
 # - one output parameter of type `Directory`
 
-# This scenario typically takes as input one pre-event acquisition, one post-even acquisition, applies an algorithm and produces a result
+# This scenario typically takes as input a stack of acquisitions, applies an aggregation algorithm and produces a result
 
-# Implementation: process the vegetation index for two dates taking input two Landsat-9 acquisitions producing a STAC Catalog with two STAC Items
-    
+# Implementation: process the NDVI taking as input a stack of Landsat-9 acquisitions producing a STAC Catalog with n STAC Items
+
 import os
 import click
 import pystac
@@ -25,16 +24,11 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     help="Detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.",
 )
 @click.option(
-    "--input-item-1",
-    "item_url_1",
+    "--input-item",
+    "item_urls",
     help="STAC Item URL or staged STAC catalog",
     required=True,
-)
-@click.option(
-    "--input-item-2",
-    "item_url_2",
-    help="STAC Item URL or staged STAC catalog",
-    required=True,
+    multiple=True,
 )
 @click.option(
     "--aoi",
@@ -55,12 +49,14 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     required=True,
     multiple=True,
 )
-def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
+def pattern_3(item_urls, aoi, bands, epsg):
     
+
+
     logger.info(f"Creating a STAC Catalog")
     cat = pystac.Catalog(id="catalog", description="water-bodies")
 
-    for item_url in [item_url_1, item_url_2]:
+    for item_url in item_urls:
 
         item = get_item(item_url)
 

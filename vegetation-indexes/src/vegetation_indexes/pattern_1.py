@@ -1,3 +1,14 @@
+# # one input/one output
+
+# The CWL includes: 
+# - one input parameter of type `Directory`
+# - one output parameter of type `Directory`
+
+# This scenario typically takes one input, applies an algorithm and produces a result
+
+# Implementation: process the NDVI taking as input a Landsat-9 acquisition
+
+
 import os
 import click
 import pystac
