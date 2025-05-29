@@ -2,6 +2,14 @@ version: '3'
 
 tasks:
 
+  build:
+    desc: 'Build the project'
+    cmds:
+      - |
+        cd vegetation-indexes
+        docker build -t vegetation-indexes:latest .
+    silent: false
+
   stage:
     desc: 'Stage-in data'
     cmds:
@@ -23,6 +31,18 @@ tasks:
           --epsg "EPSG:4326" \
           --band green \
           --band nir08
+    silent: false
+
+  pattern-1-cwl:
+    desc: 'Run pattern 1'
+    cmds:
+      - defer: .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'band: ["green", "nir08"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-1.cwl .params.yaml
     silent: false
 
   pattern-2:
@@ -65,4 +85,33 @@ tasks:
           --input-item ../data1/LC08_L2SP_042033_20231007_02_T1/ \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
+    silent: false
+
+  pattern-7a:
+    desc: 'Run pattern 7 - optional product used'
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-7 \
+          --input-item-1 ../data1/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item-2 ../data1/LC09_L2SP_042033_20231015_02_T1/  \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --band green \
+          --band nir08
+    silent: false
+
+  pattern-7b:
+    desc: 'Run pattern 7 - optional product not used'
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-7 \
+          --input-item-1 ../data1/LC08_L2SP_042033_20231007_02_T1/ \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --band green \
+          --band nir08
     silent: false
