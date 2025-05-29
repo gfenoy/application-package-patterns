@@ -52,6 +52,8 @@ def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
 
     for item_url in [item_url_1, item_url_2]:
 
+        item = get_item(item_url)
+
         logger.info(f"Read {item.id} from {item.get_self_href()}")
 
         cropped_assets = {}
@@ -101,6 +103,7 @@ def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
 
         os.makedirs(item.id, exist_ok=True)
         shutil.copy(water_body, item.id)
+        
 
         out_item = rio_stac.stac.create_stac_item(
             source=water_body,
@@ -113,6 +116,7 @@ def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
             with_raster=True,
         )
 
+        os.remove(water_body)
         cat.add_items([out_item])
 
     cat.normalize_and_save(

@@ -106,6 +106,7 @@ def pattern_1(item_url, aoi, bands, epsg):
         with_raster=True,
     )
 
+    os.remove(water_body)
     cat.add_items([out_item])
 
     cat.normalize_and_save(
