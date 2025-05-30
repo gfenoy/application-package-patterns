@@ -106,7 +106,6 @@ jobs:
         tag="ghcr.io/eoap/application-package-patterns/vegetation-indexes:${{needs.version.outputs.app-version}}"
         docker pull ${tag}
         shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
-        s="clt" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/${{matrix.step}}.cwl
         s="clt" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).requirements.DockerRequirement.dockerPull = env(t)' cwl-workflow/${{matrix.step}}.cwl
     - run: |
         set -x
