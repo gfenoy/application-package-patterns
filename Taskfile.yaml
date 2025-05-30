@@ -36,7 +36,7 @@ tasks:
   pattern-1-cwl:
     desc: 'Run pattern 1'
     cmds:
-      - defer: .params.yaml
+      - defer: rm -fv .params.yaml
       - |
         echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
@@ -52,8 +52,8 @@ tasks:
         cd vegetation-indexes
         hatch run \
           vegetation-index pattern-2 \
-          --input-item-1 ../data1/LC08_L2SP_042033_20231007_02_T1/ \
-          --input-item-2 ../data1/LC09_L2SP_042033_20231015_02_T1/  \
+          --input-item-1 ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item-2 ../data/LC09_L2SP_042033_20231015_02_T1/  \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
           --band green \
@@ -67,8 +67,8 @@ tasks:
         cd vegetation-indexes
         hatch run \
           vegetation-index pattern-3 \
-          --input-item ../data1/LC08_L2SP_042033_20231007_02_T1/ \
-          --input-item ../data1/LC09_L2SP_042033_20231015_02_T1/  \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item ../data/LC09_L2SP_042033_20231015_02_T1/  \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
           --band green \
@@ -82,9 +82,20 @@ tasks:
         cd vegetation-indexes
         hatch run \
           vegetation-index pattern-4 \
-          --input-item ../data1/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
+    silent: false
+
+  pattern-4-cwl:
+    desc: 'Run pattern 4 using CWL'
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        cwltool cwl-workflow/pattern-4.cwl .params.yaml
     silent: false
 
   pattern-7a:
@@ -94,8 +105,8 @@ tasks:
         cd vegetation-indexes
         hatch run \
           vegetation-index pattern-7 \
-          --input-item-1 ../data1/LC08_L2SP_042033_20231007_02_T1/ \
-          --input-item-2 ../data1/LC09_L2SP_042033_20231015_02_T1/  \
+          --input-item-1 ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item-2 ../data/LC09_L2SP_042033_20231015_02_T1/  \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
           --band green \
@@ -109,7 +120,7 @@ tasks:
         cd vegetation-indexes
         hatch run \
           vegetation-index pattern-7 \
-          --input-item-1 ../data1/LC08_L2SP_042033_20231007_02_T1/ \
+          --input-item-1 ../data/LC08_L2SP_042033_20231007_02_T1/ \
           --aoi="-118.985,38.432,-118.183,38.938" \
           --epsg "EPSG:4326" \
           --band green \
