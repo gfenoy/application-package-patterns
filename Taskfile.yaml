@@ -99,7 +99,8 @@ tasks:
     silent: false
 
   pattern-7a:
-    desc: 'Run pattern 7 - optional product used'
+    desc: |
+      Run pattern 7a: one optional input parameter of type `Directory?` (set) and one output parameter of type `Directory'
     cmds:
       - |
         cd vegetation-indexes
@@ -113,8 +114,23 @@ tasks:
           --band nir08
     silent: false
 
+  pattern-7a-cwl:
+    desc: |
+      Run pattern 7a using CWL: one optional input parameter of type `Directory?` (set) and one output parameter of type `Directory`
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item_1: {"class": "Directory", "path": "data/LC08_L2SP_042033_20231007_02_T1"}' > .params.yaml
+        echo 'item_2: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' >> .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'band: ["green", "nir08"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-7.cwl .params.yaml
+    silent: false
+
   pattern-7b:
-    desc: 'Run pattern 7 - optional product not used'
+    desc: |
+      Run pattern 7b: one optional input parameter of type `Directory?` (not set) and one output parameter of type `Directory'
     cmds:
       - |
         cd vegetation-indexes
@@ -125,4 +141,17 @@ tasks:
           --epsg "EPSG:4326" \
           --band green \
           --band nir08
+    silent: false
+
+  pattern-7b-cwl:
+    desc: |
+      Run pattern 7b using CWL: one optional input parameter of type `Directory?` (not set) and one output parameter of type `Directory`
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item_1: {"class": "Directory", "path": "data/LC08_L2SP_042033_20231007_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'band: ["green", "nir08"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-7.cwl .params.yaml
     silent: false
