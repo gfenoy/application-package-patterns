@@ -25,7 +25,11 @@ $graph:
         doc: bands used for the NDWI
         type: string[]
         default: ["green", "nir08"]
-      item:
+      item_1:
+        doc: Reference to a STAC item
+        label: STAC item reference
+        type: Directory
+      item_2:
         doc: Reference to a STAC item
         label: STAC item reference
         type: Directory
@@ -38,7 +42,8 @@ $graph:
       step:
         run: "#clt"
         in:
-          item: item
+          item_1: item_1
+          item_2: item_2
           aoi: aoi
           epsg: epsg
           band: bands
@@ -60,12 +65,16 @@ $graph:
     baseCommand: 
     - vegetation-index
     arguments:
-    - pattern-1
+    - pattern-2
     inputs:
-      item:
+      item_1:
         type: Directory
         inputBinding:
-            prefix: --input-item
+            prefix: --input-item-1
+      item_2:
+        type: Directory
+        inputBinding:
+            prefix: --input-item-2
       aoi:
         type: string
         inputBinding:

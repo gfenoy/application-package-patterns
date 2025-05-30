@@ -14,7 +14,7 @@ The CWL includes:
 
 This scenario typically takes one input, applies an algorithm and produces a result
 
-Implementation: process the NDVI taking as input a Landsat-9 acquisition
+Implementation: delineate water bodies using NDWI and Otsu automatic threshold taking as input a Landsat-9 acquisition
 
 ## 2. two inputs/one output
 
@@ -24,7 +24,7 @@ The CWL includes:
 
 This scenario typically takes as input one pre-event acquisition, one post-even acquisition, applies an algorithm and produces a result
 
-Implementation: process the NDVI for two dates taking input two Landsat-9 acquisitions producing a STAC Catalog with two STAC Items
+Implementation: delineate water bodies using NDWI and Otsu automatic threshold taking as input Landsat-9 acquisitions
 
 ## 3. scatter on inputs/one output
 

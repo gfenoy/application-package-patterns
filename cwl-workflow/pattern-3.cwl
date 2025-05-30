@@ -9,7 +9,8 @@ $graph:
     id: main
     label: Water bodies detection based on NDWI and the otsu threshold
     doc: Water bodies detection based on NDWI and otsu threshold applied to a single Sentinel-2 COG STAC item
-    requirements: []
+    requirements: 
+      ScatterFeatureRequirement: {}
     inputs:
       aoi:
         label: area of interest
@@ -25,25 +26,28 @@ $graph:
         doc: bands used for the NDWI
         type: string[]
         default: ["green", "nir08"]
-      item:
+      items:
         doc: Reference to a STAC item
         label: STAC item reference
-        type: Directory
+        type: Directory[]
     outputs:
       - id: stac_catalog
         outputSource:
           - step/stac-catalog
-        type: Directory
+        type: Directory[]
     steps:
       step:
         run: "#clt"
         in:
-          item: item
+          item: items
           aoi: aoi
           epsg: epsg
           band: bands
         out:
           - stac-catalog
+        scatter: item
+        scatterMethod: dotproduct
+
   - class: CommandLineTool
     id: clt
     requirements:
