@@ -1,0 +1,21 @@
+class: Workflow
+$namespaces:
+  cwltool: http://commonwl.org/cwltool#
+doc: Wrapped workflow with required stage-in and stage-out steps
+label: Wrapped workflow 
+id: main
+hints:
+  "cwltool:Secrets":
+    secrets: []
+inputs: {}
+outputs: {}
+
+requirements:
+  SubworkflowFeatureRequirement: {}
+  ScatterFeatureRequirement: {}
+
+steps:
+  node_stage_out:
+    in: {}
+    out: []
+    run: ''
