@@ -29,6 +29,7 @@ dependencies = [
   "nose2", 
   "cwltool",
   "ipykernel",
+  "graphviz",
 ]
 
 [tool.hatch.metadata]
