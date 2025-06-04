@@ -29,7 +29,6 @@ dependencies = [
   "nose2", 
   "cwltool",
   "ipykernel",
-  "bash_kernel",
 ]
 
 [tool.hatch.metadata]

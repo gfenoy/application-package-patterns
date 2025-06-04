@@ -21,7 +21,6 @@ plugins:
       version: 10.6.0
   - mkdocs-jupyter:
       execute: true
-      kernel_name: bash
       show_input: False
       no_input: True
 
