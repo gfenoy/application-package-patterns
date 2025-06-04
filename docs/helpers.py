@@ -39,8 +39,6 @@ def wrap_cwl(cwl_file, entrypoint="main"):
     main_cwl_file = os.path.join("..", "tests", "templates/main.yaml")
     rules_file = os.path.join("..", "tests", "templates/rules.yaml")
 
-    print(os.path.exists(stagein_cwl_file))
-
     runner = CliRunner()
     result = runner.invoke(
         app.main,

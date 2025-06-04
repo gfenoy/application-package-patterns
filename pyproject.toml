@@ -30,6 +30,7 @@ dependencies = [
   "cwltool",
   "ipykernel",
   "graphviz",
+  "cwl-utils",
 ]
 
 [tool.hatch.metadata]
