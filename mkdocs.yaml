@@ -19,6 +19,11 @@ plugins:
   - search
   - mermaid2:
       version: 10.6.0
+  - mkdocs-jupyter:
+      execute: true
+      kernel_name: bash
+      show_input: False
+      no_input: True
 
 markdown_extensions:
   - pymdownx.details
@@ -53,6 +58,6 @@ extra_javascript:
 
 nav:
   - Introduction: 'index.md'
-  
+  - Pattern 1: pattern-1.ipynb
 
 copyright: <a href="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg">License CC BY-SA 4.0</a>, by <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons</a>

@@ -27,7 +27,9 @@ classifiers = [
 dependencies = [
   "cwl-wrapper @ git+https://github.com/eoepca/cwl-wrapper@hatch", 
   "nose2", 
-  "cwltool"
+  "cwltool",
+  "ipykernel",
+  "bash_kernel",
 ]
 
 [tool.hatch.metadata]

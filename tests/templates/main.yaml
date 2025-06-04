@@ -3,7 +3,7 @@ $namespaces:
   cwltool: http://commonwl.org/cwltool#
 doc: Wrapped workflow with required stage-in and stage-out steps
 label: Wrapped workflow 
-id: main
+id: _main
 hints:
   "cwltool:Secrets":
     secrets: []
