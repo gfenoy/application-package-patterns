@@ -44,7 +44,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-1.cwl .params.yaml
+        cwltool cwl-workflow/pattern-1.cwl#water-bodies-detection .params.yaml
     silent: false
 
   pattern-2:
@@ -152,7 +152,28 @@ tasks:
         cwltool cwl-workflow/pattern-5.cwl .params.yaml
     silent: false
 
+  pattern-6:
+    desc: 'Run pattern 6'
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-6 \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" 
+    silent: false
 
+  pattern-6-cwl:
+    desc: 'Run pattern 6 using CWL'
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        cwltool cwl-workflow/pattern-6.cwl .params.yaml
+    silent: false
 
   pattern-7a:
     desc: |
@@ -210,4 +231,63 @@ tasks:
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
         cwltool cwl-workflow/pattern-7.cwl .params.yaml
+    silent: false
+
+  pattern-8a:
+    desc: |
+      Run pattern 8: one input parameter of type `Directory`, one output parameter of type `Directory?` (set)
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-8 \
+          --input-item ../data/LC09_L2SP_042033_20231015_02_T1 \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --band green \
+          --band nir08 \
+          --produce-output
+    silent: false
+
+  pattern-8a-cwl:
+    desc: |
+      Run pattern 8 using CWL: one input parameter of type `Directory`, one output parameter of type `Directory?` (set)
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'band: ["green", "nir08"]' >> .params.yaml
+        echo 'produce_output: true' >> .params.yaml
+        cwltool cwl-workflow/pattern-8.cwl#water-bodies-detection .params.yaml
+    silent: false
+
+  pattern-8b:
+    desc: |
+      Run pattern 8: one input parameter of type `Directory`, one output parameter of type `Directory?` (not set)
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-8 \
+          --input-item ../data/LC09_L2SP_042033_20231015_02_T1 \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --band green \
+          --band nir08
+    silent: false
+
+  pattern-8b-cwl:
+    desc: |
+      Run pattern 8 using CWL: one input parameter of type `Directory`, one output parameter of type `Directory?` (not set)
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'band: ["green", "nir08"]' >> .params.yaml
+        echo 'produce_output: false' >> .params.yaml
+        cwltool cwl-workflow/pattern-8.cwl#water-bodies-detection .params.yaml
     silent: false
