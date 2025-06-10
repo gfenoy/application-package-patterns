@@ -291,3 +291,72 @@ tasks:
         echo 'produce_output: false' >> .params.yaml
         cwltool cwl-workflow/pattern-8.cwl#water-bodies-detection .params.yaml
     silent: false
+    
+  pattern-9a:
+    desc: |
+      Run pattern 9: one input parameter of type `Directory`, one output parameter of type `Directory[]?` (set)
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-9 \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --vegetation-index ndwi
+    silent: false
+
+  pattern-9a-cwl:
+    desc: |
+      Run pattern 9 using CWL: one input parameter of type `Directory`, one output parameter of type `Directory[]?` (set)
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'indexes: ["ndwi", "ndwi"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+    silent: false
+    
+
+  pattern-9b:
+    desc: |
+      Run pattern 9: one input parameter of type `Directory`, one output parameter of type `Directory[]?` (not set)
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-9 \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --vegetation-index none
+    silent: false
+
+  pattern-9b-cwl:
+    desc: |
+      Run pattern 9 using CWL: one input parameter of type `Directory`, one output parameter of type `Directory[]?` (some set)
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'indexes: ["ndwi", "ndwi", "none"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+    silent: false
+
+
+  pattern-9c-cwl:
+    desc: |
+      Run pattern 9 using CWL: one input parameter of type `Directory`, one output parameter of type `Directory[]?` (none set)
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'indexes: ["none", "none", "none"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+    silent: false

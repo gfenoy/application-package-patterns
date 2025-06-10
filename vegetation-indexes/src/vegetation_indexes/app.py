@@ -7,11 +7,12 @@ from vegetation_indexes.pattern_5 import pattern_5
 from vegetation_indexes.pattern_6 import pattern_6
 from vegetation_indexes.pattern_7 import pattern_7
 from vegetation_indexes.pattern_8 import pattern_8
+from vegetation_indexes.pattern_9 import pattern_9
 
 @click.group()
 def app_group():
     pass
 
-for pattern in [pattern_1, pattern_2, pattern_3, pattern_4, pattern_5, pattern_6, pattern_7, pattern_8]:
+for pattern in [pattern_1, pattern_2, pattern_3, pattern_4, pattern_5, pattern_6, pattern_7, pattern_8, pattern_9]:
     app_group.add_command(pattern)
 
