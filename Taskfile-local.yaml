@@ -360,3 +360,30 @@ tasks:
         echo 'indexes: ["none", "none", "none"]' >> .params.yaml
         cwltool cwl-workflow/pattern-9.cwl .params.yaml
     silent: false
+
+  pattern-10:
+    desc: 'Run pattern 10'
+    cmds:
+      - |
+        cd vegetation-indexes
+        hatch run \
+          vegetation-index pattern-5 \
+          --input-item ../data/LC08_L2SP_042033_20231007_02_T1/ \
+          --aoi="-118.985,38.432,-118.183,38.938" \
+          --epsg "EPSG:4326" \
+          --vegetation-index ndwi
+    silent: false
+
+  pattern-10-cwl:
+    desc: 'Run pattern 10 using CWL'
+    cmds:
+      - defer: rm -fv .params.yaml
+      - |
+        echo 'item:' > .params.yaml
+        echo '  - {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' >> .params.yaml
+        echo '  - {"class": "Directory", "path": "data/LC08_L2SP_042033_20231007_02_T1"}' >> .params.yaml
+        echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
+        echo 'epsg: "EPSG:4326"' >> .params.yaml
+        echo 'vegetation_index: ["ndwi", "ndwi"]' >> .params.yaml
+        cwltool cwl-workflow/pattern-10.cwl .params.yaml
+    silent: false

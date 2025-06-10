@@ -13,12 +13,10 @@ import click
 import pystac
 import rasterio
 from loguru import logger
-import rasterio
-import pystac
 import shutil
 import rio_stac
 from vegetation_indexes.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+    normalized_difference, get_item)
 
 @click.command(
     short_help="Water bodies detection",
@@ -78,9 +76,6 @@ def pattern_4(item_url, aoi, epsg):
             "blockysize": 256,
         }
     )
-
-    ndvi_output = "ndvi.tif"
-    ndwi_output = "ndwi.tif"
 
     for name, output in [("ndvi", ndvi), ("ndwi", ndwi)]:
 

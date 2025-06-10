@@ -13,12 +13,10 @@ import click
 import pystac
 import rasterio
 from loguru import logger
-import rasterio
-import pystac
 import shutil
 import rio_stac
 from vegetation_indexes.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+    normalized_difference, get_item)
 
 @click.command(
     short_help="Water bodies detection",
@@ -120,7 +118,7 @@ def pattern_5(item_url, aoi, epsg, vegetation_index):
     cat.add_items([out_item])
 
     cat.normalize_and_save(
-        root_href=f"./", catalog_type=pystac.CatalogType.SELF_CONTAINED
+        root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
     shutil.copy(f"{name}.tif", os.path.join(name, f"{name}.tif"))
     os.remove(f"{name}.tif")

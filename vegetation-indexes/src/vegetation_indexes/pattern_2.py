@@ -13,8 +13,6 @@ import click
 import pystac
 import rasterio
 from loguru import logger
-import rasterio
-import pystac
 import shutil
 import rio_stac
 from vegetation_indexes.functions import (aoi2box, crop, get_asset,
@@ -57,7 +55,7 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
 )
 def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
     
-    logger.info(f"Creating a STAC Catalog")
+    logger.info("Creating a STAC Catalog")
     cat = pystac.Catalog(id="catalog", description="water-bodies")
 
     for item_url in [item_url_1, item_url_2]:
@@ -101,7 +99,7 @@ def pattern_2(item_url_1, item_url_2, aoi, bands, epsg):
         water_body = "otsu.tif"
 
         with rasterio.open(water_body, "w", **out_meta) as dst_dataset:
-            logger.info(f"Write otsu.tif")
+            logger.info("Write otsu.tif")
             dst_dataset.write(water_bodies, indexes=1)
    
 
