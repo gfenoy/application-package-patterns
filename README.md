@@ -76,7 +76,7 @@ This scenario may take as input an acquisition, an optional input, applies an al
 
 Implementation: process the NDVI taking as input Landsat-9 acquisitions
 
-## one input, optional output
+## 8. one input, optional output
 
 The CWL includes: 
 - one input parameter of type `Directory`
@@ -86,10 +86,18 @@ This scenario takes as input an acquisition, applies an algorithm and may or may
 
 Implementation: process the NDVI taking as input a Landsat-9 acquisition with a parameter to create or not the output
 
-## one input, optional outputs
+## 9. one input, optional outputs
 
 The CWL includes: 
 - one input parameter of type `Directory`
 - output parameter of type `Directory[]?`
 
 This scenario takes as input an acquisition, applies an algorithm and may or may not generate outputs 
+
+## 10. multiple inputs, multiple outputs
+
+The CWL includes: 
+- input parameter of type `Directory[]`
+- output parameter of type `Directory[]`
+
+This scenario takes as input an array of acquisition, applies an algorithm to each of them. 
