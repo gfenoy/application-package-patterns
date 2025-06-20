@@ -47,6 +47,18 @@ tasks:
         cwltool cwl-workflow/pattern-1.cwl#water-bodies-detection .params.yaml
     silent: false
 
+  pattern-1-wrap:
+    desc: |
+      Wrap pattern 1 using eoap-cwlwrap
+    cmds:
+      - |
+        eoap-cwlwrap \
+          --stage-in templates/stage-in.cwl \
+          --stage-out templates/stage-out.cwl \
+          --workflow cwl-workflow/pattern-1.cwl \
+          --workflow-id water-bodies-detection \
+          --output wrapped-cwl-workflow/pattern-1.cwl
+
   pattern-2:
     desc: 'Run pattern 2'
     cmds:
