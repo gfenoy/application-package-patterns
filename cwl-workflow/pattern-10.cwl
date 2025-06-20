@@ -1,12 +1,10 @@
-# ## 5. one input/scatter on outputs
+# ## 10. multiple inputs, multiple outputs
 
 # The CWL includes: 
-# - one input parameter of type `Directory`
-# - scatter on an output parameter of type `Directory[]`
+# - input parameter of type `Directory[]`
+# - output parameter of type `Directory[]`
 
-# This scenario takes as input an acquisition, applies an algorithm and generates several outputs
-
-# Implementation: process the NDVI and NDWI taking as input a Landsat-9 acquisition and generating a stack of STAC Catalogs
+# This scenario takes as input an array of acquisition, applies an algorithm to each of them. 
 
 
 cwlVersion: v1.0
