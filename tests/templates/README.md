@@ -1,0 +1,1 @@
+This folder contains the cwl-wrapper templates using for the application packages tests

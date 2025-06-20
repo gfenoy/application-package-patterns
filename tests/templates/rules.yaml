@@ -1,0 +1,113 @@
+rulez:
+  version: 1
+
+parser:
+  type: $graph
+  driver: cwl
+
+onstage:
+  driver: cwl
+
+  stage_in:
+    connection_node: node_stage_in
+    if_scatter:
+      scatterMethod: dotproduct
+    input:
+      template:
+        overwrite: True
+
+  on_stage:
+    connection_node: on_stage
+
+  stage_out:
+    connection_node: node_stage_out
+    scatter: False
+    if_scatter:
+      scatterMethod: dotproduct
+#    follow_node: node_metrics_out
+
+
+output:
+  driver: cwl
+  name: '-'
+  type: $graph
+
+
+cwl:
+  GlobalInput:
+    # Don't change this
+    Directory: string
+    Directory[]: string[]
+
+  OptionalInput:
+    # Don't change this
+    Directory: string?
+    Directory[]: string[]?
+
+  stage_in:
+    # Don't change this
+    Directory?:
+      type: string?
+
+    Directory:
+      type: string?
+
+    Directory[]:
+      type: string[]
+
+  stage_out:
+    # Don't change this
+    Directory:
+      type: Directory
+    Directory[]:
+      type: Directory[]
+
+  outputBindingResultStageIn:
+    # No need to change this as the output of the 
+    # stage-in step is a glob on all files produced by the stage-in step
+    command:
+      Directory:
+        outputBinding:
+          glob: .
+        type: Directory
+      Directory[]:
+        outputBinding:
+          glob: .
+        type: Directory[]
+
+  outputBindingResultStageOut:
+    # This section depends on how the stage-out step is implemented
+    command:
+      # Directory:
+        # outputBinding:
+        #   glob: .
+        # type: Directory
+      
+      # this maps the output binding of the stage-out steps to all output parameters of type Directory
+      Directory:
+        outputBinding:
+          glob: message
+          loadContents: true
+          outputEval:  $( self[0].contents )
+        type: string
+          
+      # Directory:
+      #   outputBinding:
+      #     outputEval: ${  return "s3://" + inputs.s3_bucket + "/" + inputs.sub_path + "/catalog.json"; }
+      #   type: string
+
+
+      # Directory[]:
+      #   outputBinding:
+      #     glob: .
+      #   type: Directory[]
+
+      # Directory?:
+      #   outputBinding:
+      #     glob: ${ if (inputs.input == null) {return null } else {return ".";} }
+      #   type: Directory?
+
+    # stepOut:
+    #   type:
+    #     items: Directory
+    #     type: array

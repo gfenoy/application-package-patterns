@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vegetation-indexes"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Fabrice Brito", email = "fabrice.brito@terradue.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+
+dependencies = [
+  "rasterio",
+  "click",
+  "pystac",
+  "loguru",
+  "pyproj",
+  "shapely",
+  "scikit-image",
+  "pystac",
+  "rio_stac"
+]
+
+[project.urls]
+Documentation = "https://github.com/Fabrice Brito/vegetation-indexes#readme"
+Issues = "https://github.com/Fabrice Brito/vegetation-indexes/issues"
+Source = "https://github.com/Fabrice Brito/vegetation-indexes"
+
+[tool.hatch.envs.prod]
+path = "/app/envs/vegetation-index"
+
+[project.scripts]
+vegetation-index = "vegetation_indexes.app:app_group"
+
+
+[tool.hatch.version]
+path = "src/vegetation_indexes/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/vegetation_indexes tests}"
+
+[tool.coverage.run]
+source_pkgs = ["vegetation_indexes", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/vegetation_indexes/__about__.py",
+]
+
+[tool.coverage.paths]
+vegetation_indexes = ["src/vegetation_indexes", "*/vegetation-indexes/src/vegetation_indexes"]
+tests = ["tests", "*/vegetation-indexes/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+
+
+

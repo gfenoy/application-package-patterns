@@ -1,0 +1,10 @@
+data*
+__pycache__
+wip.md
+*.tif
+LC09*
+LC08*
+catalog.json
+*.aux.xml
+ndvi
+ndwi
