@@ -180,7 +180,7 @@ name = "pattern-5-test"
 description = "Test case for pattern-5"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -218,7 +218,7 @@ name = "pattern-6-test"
 description = "Test case for pattern-6"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -255,7 +255,7 @@ name = "pattern-7-test"
 description = "Test case for pattern-7"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -294,7 +294,7 @@ name = "pattern-8-test"
 description = "Test case for pattern-8"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -332,7 +332,7 @@ name = "pattern-9-test"
 description = "Test case for pattern-9"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -370,7 +370,7 @@ name = "pattern-10-test"
 description = "Test case for pattern-10"
 
 [workflows.tests.params]
-items = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
