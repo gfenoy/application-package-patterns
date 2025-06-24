@@ -116,6 +116,18 @@ tasks:
         cwltool cwl-workflow/pattern-3.cwl .params.yaml
     silent: false
 
+  pattern-3-wrap:
+    desc: |
+      Wrap pattern 3 using eoap-cwlwrap
+    cmds:
+      - |
+        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-3.cwl 
+        eoap-cwlwrap \
+          --stage-in templates/stage-in.cwl \
+          --stage-out templates/stage-out.cwl \
+          --workflow cwl-workflow/pattern-3.cwl \
+          --workflow-id water-bodies-detection \
+          --output wrapped-cwl-workflow/pattern-3.cwl
 
   pattern-4:
     desc: 'Run pattern 4'
