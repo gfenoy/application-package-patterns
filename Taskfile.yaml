@@ -28,3 +28,49 @@ tasks:
   - task: remote:test-by-index
     vars:
       VAR: 0
+
+  pattern-2:
+  - task: remote:test-by-index
+    vars:
+      VAR: 1
+
+  pattern-3:
+  - task: remote:test-by-index
+    vars:
+      VAR: 2
+
+  pattern-4:
+  - task: remote:test-by-index
+    vars:
+      VAR: 3
+
+  pattern-5:  
+  - task: remote:test-by-index
+    vars:
+      VAR: 4
+
+  pattern-6:
+  - task: remote:test-by-index
+    vars:
+      VAR: 5
+
+  pattern-7:
+  - task: remote:test-by-index
+    vars:
+      VAR: 6
+
+  pattern-8:
+  - task: remote:test-by-index
+    vars:
+      VAR: 7
+
+  pattern-9:
+  - task: remote:test-by-index
+    vars:
+      VAR: 8
+
+  pattern-10:
+  - task: remote:test-by-index
+    vars:
+      VAR: 9
+
