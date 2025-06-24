@@ -52,6 +52,7 @@ tasks:
       Wrap pattern 1 using eoap-cwlwrap
     cmds:
       - |
+        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-1.cwl 
         eoap-cwlwrap \
           --stage-in templates/stage-in.cwl \
           --stage-out templates/stage-out.cwl \

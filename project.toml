@@ -15,6 +15,10 @@ serviceAccount = "kaniko-sa"
 registry = "cr.terradue.com/earthquake-monitoring"
 secret = "kaniko-secret"
 
+[tools.clt]
+context = "vegetation-indexes"
+path = "cwl-workflow/pattern-1.cwl#clt"
+
 
 [[workflows]]
 path = "wrapped-cwl-workflow/pattern-1.cwl"

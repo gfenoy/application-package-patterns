@@ -21,7 +21,7 @@ baseCommand:
 - python
 - stage.py
 arguments:
-- $( inputs.reference )
+- $( inputs.reference.href )
 - $( inputs.another_input ) # This is an additional input to demonstrate the use of multiple inputs
 requirements:
   SchemaDefRequirement:
@@ -66,7 +66,8 @@ requirements:
               return cat
 
           href = sys.argv[1]
-
+          empty_arg = sys.argv[2]
+          
           cat = asyncio.run(main(href))
 
 

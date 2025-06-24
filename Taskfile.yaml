@@ -2,7 +2,8 @@ version: '3'
 
 includes:
   remote: https://raw.githubusercontent.com/eoap/task-files/refs/tags/0.1.0/build-test/Taskfile.yaml
-
+  local: Taskfile-local.yaml
+  
 tasks:
   build:
   - task: remote:build

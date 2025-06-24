@@ -19,8 +19,8 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     normalized_difference, get_item)
 
 @click.command(
-    short_help="Water bodies detection",
-    help="Detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.",
+    short_help="NDVI and NDWI vegetation indexes",
+    help="Calculates NDVI and NDWI vegetation indexes from Landsat-9 data.",
 )
 @click.option(
     "--input-item",
