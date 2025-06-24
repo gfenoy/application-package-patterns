@@ -30,7 +30,7 @@ tasks:
           --stage-in templates/stage-in.cwl \
           --stage-out templates/stage-out.cwl \
           --workflow cwl-workflow/pattern-${var}.cwl \
-          --workflow-id water-bodies-detection \
+          --workflow-id pattern-${var} \
           --output wrapped-cwl-workflow/pattern-${var}.cwl
 
 
