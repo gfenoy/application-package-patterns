@@ -6,7 +6,7 @@ schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
 $graph:
   - class: Workflow
-    id: water-bodies-detection
+    id: pattern-1
     label: Water bodies detection based on NDWI and the otsu threshold
     doc: Water bodies detection based on NDWI and otsu threshold applied to a single Sentinel-2 COG STAC item
     requirements: []

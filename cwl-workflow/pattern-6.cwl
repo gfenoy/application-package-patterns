@@ -16,7 +16,7 @@ schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
 $graph:
   - class: Workflow
-    id: main
+    id: pattern-6
     label: NDVI mean
     doc: NDVI mean
     requirements:

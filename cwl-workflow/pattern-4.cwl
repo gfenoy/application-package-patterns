@@ -6,7 +6,7 @@ schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
 $graph:
   - class: Workflow
-    id: main
+    id: pattern-4
     label: NDVI and NDWI vegetation indexes
     doc: NDVI and NDWI vegetation indexes
     requirements: []
