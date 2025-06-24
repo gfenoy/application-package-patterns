@@ -326,13 +326,49 @@ path = "wrapped-cwl-workflow/pattern-8.cwl"
 
 [[workflows.tests]]
 name = "pattern-8-test"
-description = "Test case for pattern-8"
+description = "Test case for pattern-8 with produce_output set to false"
 
 [workflows.tests.params]
 item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
+produce_output = false
+
+another_input = "a_value"
+
+s3_bucket = "results"
+sub_path = "pattern-8"
+aws_access_key_id = "test"
+aws_secret_access_key = "test"
+region_name = "us-east-1"
+endpoint_url = "http://eoap-application-package-patterns-localstack:4566"
+
+[workflows.tests.execution.cluster]
+usage_report = "usage.json"
+pool_logs_basepath = "logs"
+max_ram = "4G"
+max_cores = 8
+pod_serviceaccount = "calrissian-sa"
+tool_logs_basepath = "logs"
+
+[workflows.tests.execution.paths]
+volume = "/calrissian/pattern-8"
+stdout = "results.json"
+stderr = "app.log"
+tmp_outdir_prefix = "tmp"
+outdir = "results"
+
+[[workflows.tests]]
+name = "pattern-8-test-produce-output"
+description = "Test case for pattern-8 with produce_output set to true"
+
+[workflows.tests.params]
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+aoi = "-118.985,38.432,-118.183,38.938"
+bands = ["green", "nir08"]
+epsg = "EPSG:4326"
+produce_output = true
 
 another_input = "a_value"
 
@@ -359,18 +395,20 @@ tmp_outdir_prefix = "tmp"
 outdir = "results"
 
 
+
 [[workflows]]
 path = "wrapped-cwl-workflow/pattern-9.cwl"
 
 [[workflows.tests]]
-name = "pattern-9-test"
-description = "Test case for pattern-9"
+name = "pattern-9-test-no-optional-output"
+description = "Test case for pattern-9 with no optional output"
 
 [workflows.tests.params]
 item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
+indexes = ["ndwi", "ndwi"]
 
 another_input = "a_value"
 
@@ -395,6 +433,43 @@ stdout = "results.json"
 stderr = "app.log"
 tmp_outdir_prefix = "tmp"
 outdir = "results"
+
+
+[[workflows.tests]]
+name = "pattern-9-test-optional-output"
+description = "Test case for pattern-9 with optional output"
+
+[workflows.tests.params]
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+aoi = "-118.985,38.432,-118.183,38.938"
+bands = ["green", "nir08"]
+epsg = "EPSG:4326"
+indexes = ["ndwi", "ndwi", "none"]
+
+another_input = "a_value"
+
+s3_bucket = "results"
+sub_path = "pattern-9"
+aws_access_key_id = "test"
+aws_secret_access_key = "test"
+region_name = "us-east-1"
+endpoint_url = "http://eoap-application-package-patterns-localstack:4566"
+
+[workflows.tests.execution.cluster]
+usage_report = "usage.json"
+pool_logs_basepath = "logs"
+max_ram = "4G"
+max_cores = 8
+pod_serviceaccount = "calrissian-sa"
+tool_logs_basepath = "logs"
+
+[workflows.tests.execution.paths]
+volume = "/calrissian/pattern-9"
+stdout = "results.json"
+stderr = "app.log"
+tmp_outdir_prefix = "tmp"
+outdir = "results"
+
 
 
 [[workflows]]
