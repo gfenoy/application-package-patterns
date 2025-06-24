@@ -25,51 +25,61 @@ tasks:
   - task: remote:test
   
   pattern-1:
+  - task: local:pattern-1-wrap
   - task: remote:test-by-index
     vars:
       VAR: 0
 
   pattern-2:
+  - task: local:pattern-2-wrap
   - task: remote:test-by-index
     vars:
       VAR: 1
 
   pattern-3:
+  - task: local:pattern-3-wrap
   - task: remote:test-by-index
     vars:
       VAR: 2
 
   pattern-4:
+  - task: local:pattern-4-wrap
   - task: remote:test-by-index
     vars:
       VAR: 3
 
   pattern-5:  
+  - task: local:pattern-5-wrap
   - task: remote:test-by-index
     vars:
       VAR: 4
 
   pattern-6:
+  - task: local:pattern-6-wrap
   - task: remote:test-by-index
     vars:
       VAR: 5
 
   pattern-7:
+  - task: local:pattern-7-wrap
   - task: remote:test-by-index
     vars:
       VAR: 6
 
   pattern-8:
+  - task: local:pattern-8-wrap
   - task: remote:test-by-index
     vars:
       VAR: 7
 
   pattern-9:
+  - task: local:pattern-9-wrap
   - task: remote:test-by-index
     vars:
       VAR: 8
 
   pattern-10:
+  - task: local:pattern-10-wrap
   - task: remote:test-by-index
     vars:
       VAR: 9
