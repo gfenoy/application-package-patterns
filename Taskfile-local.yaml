@@ -19,6 +19,21 @@ tasks:
         hatch run stage-in --output-dir ../data "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1"
     silent: false
 
+
+  wrap-by-index:
+    desc: 'Wrap the CWL workflow by index'
+    cmds:
+      - |
+        var="{{.VAR}}"
+        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-${var}.cwl 
+        eoap-cwlwrap \
+          --stage-in templates/stage-in.cwl \
+          --stage-out templates/stage-out.cwl \
+          --workflow cwl-workflow/pattern-${var}.cwl \
+          --workflow-id water-bodies-detection \
+          --output wrapped-cwl-workflow/pattern-${var}.cwl
+
+
   pattern-1:
     desc: |
       Run pattern 1: one input parameter of type `Directory`, one output parameter of type `Directory`
@@ -48,17 +63,9 @@ tasks:
     silent: false
 
   pattern-1-wrap:
-    desc: |
-      Wrap pattern 1 using eoap-cwlwrap
-    cmds:
-      - |
-        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-1.cwl 
-        eoap-cwlwrap \
-          --stage-in templates/stage-in.cwl \
-          --stage-out templates/stage-out.cwl \
-          --workflow cwl-workflow/pattern-1.cwl \
-          --workflow-id water-bodies-detection \
-          --output wrapped-cwl-workflow/pattern-1.cwl
+    - task: wrap-by-index
+      vars:
+        VAR: 1
 
   pattern-2:
     desc: 'Run pattern 2'
