@@ -5,7 +5,7 @@ id: my-asthonishing-stage-in
 
 inputs:
   reference:
-    type: Directory
+    type: https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL
     doc: "A STAC Item to stage" 
     label: "STAC Item URL"
   another_input:
@@ -24,6 +24,9 @@ arguments:
 - $( inputs.reference )
 - $( inputs.another_input ) # This is an additional input to demonstrate the use of multiple inputs
 requirements:
+  SchemaDefRequirement:
+    types:
+    - $import: https://raw.githubusercontent.com/eoap/schemas/main/url.yaml
   DockerRequirement:
     dockerPull: ghcr.io/eoap/mastering-app-package/stage:1.0.0
   InlineJavascriptRequirement: {}
@@ -65,3 +68,5 @@ requirements:
           href = sys.argv[1]
 
           cat = asyncio.run(main(href))
+
+
