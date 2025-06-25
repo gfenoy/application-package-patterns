@@ -287,7 +287,7 @@ outdir = "results"
 
 [[workflows.tests]]
 name = "pattern-7-test-optional-input-not-set"
-description = "Test case for pattern-7"
+description = "Test case for pattern-7 - optional input not set"
 
 [workflows.tests.params]
 item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
@@ -351,6 +351,7 @@ max_ram = "4G"
 max_cores = 8
 pod_serviceaccount = "calrissian-sa"
 tool_logs_basepath = "logs"
+debug = true
 
 [workflows.tests.execution.paths]
 volume = "/calrissian/pattern-8"
