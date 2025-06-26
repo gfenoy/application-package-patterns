@@ -8,3 +8,5 @@ catalog.json
 *.aux.xml
 ndvi
 ndwi
+build-test-Taskfile.yaml.*
+.task
