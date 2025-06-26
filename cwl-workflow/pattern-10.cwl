@@ -42,18 +42,14 @@ $graph:
         type: Directory[]
 
     outputs:
-      - id: vegetation_indexes
-        doc: Vegetation indexes
-        label: Vegetation indexes
-        outputSource:
-          - subworkflow/vegetation_indexes
-        
-        type:
-          type: array
-          items:
-            type: array
-            items: Directory
-
+    - id: vegetation_indexes
+      label: Vegetation indexes
+      doc: Vegetation indexes
+      outputSource:
+        - flatten/flat
+      type:
+        type: array
+        items: Directory
     steps:
       subworkflow:
         run: "#vegetation_indexes"
@@ -67,7 +63,13 @@ $graph:
         scatter: 
         - item
         scatterMethod: dotproduct
-
+      
+      flatten:
+        run: "#flatten_array"
+        in:
+          nested: subworkflow/vegetation_indexes
+        out:
+          - flat
 
   - class: Workflow
     id: vegetation_indexes
@@ -157,3 +159,22 @@ $graph:
         type: Directory
 
 
+  - class: ExpressionTool
+    id: flatten_array
+    label: Flatten Directory[][] → Directory[]
+    inputs:
+      - id: nested
+        type:
+          type: array
+          items:
+            type: array
+            items: Directory
+    outputs:
+      - id: flat
+        type:
+          type: array
+          items: Directory
+    expression: |
+      ${ return { flat: [].concat(...inputs.nested) }; }
+    requirements:
+      - class: InlineJavascriptRequirement

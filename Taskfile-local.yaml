@@ -449,5 +449,5 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'vegetation_index: ["ndwi", "ndwi"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-10.cwl .params.yaml
+        cwltool cwl-workflow/pattern-10.cwl#pattern-10 .params.yaml
     silent: false
