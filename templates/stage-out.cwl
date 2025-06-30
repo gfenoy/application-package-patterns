@@ -24,7 +24,7 @@ inputs:
     type: Directory
 outputs:
   s3_catalog_output:
-    type: https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL
+    type: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI
     outputBinding:
       glob: catalog-uri.txt
       loadContents: true
@@ -50,7 +50,7 @@ arguments:
 requirements:
   SchemaDefRequirement:
     types:
-    - $import: https://raw.githubusercontent.com/eoap/schemas/main/url.yaml
+    - $import: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml
   DockerRequirement:
     dockerPull: ghcr.io/eoap/mastering-app-package/stage:1.0.0
   InlineJavascriptRequirement: {}
