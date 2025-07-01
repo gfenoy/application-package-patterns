@@ -36,6 +36,21 @@ This scenario typically takes as input a stack of acquisitions, applies an aggre
 
 Implementation: process the NDVI taking as input a stack of Landsat-9 acquisitions producing a STAC Catalog with n STAC Items
 
+```json
+{
+    "water_bodies": [
+        {
+            "value": "s3://results/pattern-3-9451lj/catalog.json",
+            "type": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI"
+        },
+        {
+            "value": "s3://results/pattern-3-ezt7al/catalog.json",
+            "type": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI"
+        }
+    ]
+}
+```
+
 ## 4. one input/two outputs
 
 The CWL includes: 
@@ -65,6 +80,14 @@ The CWL includes:
 This corner-case scenario takes as input an acquisition, applies an algorithm and generates an output that is not a STAC Catalog
 
 Implementation: derive the NDVI mean taking as input a Landsat-9 acquisition
+
+Output:
+
+```json
+{
+    "mean": 0.07260978
+}
+```
 
 ## 7. optional inputs, one output
 
