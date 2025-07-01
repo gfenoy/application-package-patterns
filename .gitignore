@@ -10,3 +10,4 @@ ndvi
 ndwi
 build-test-Taskfile.yaml.*
 .task
+staged
