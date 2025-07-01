@@ -8,7 +8,7 @@ $graph:
   - class: Workflow
     id: pattern-2
     label: Water bodies detection based on NDWI and the otsu threshold
-    doc: Water bodies detection based on NDWI and otsu threshold applied to a single Sentinel-2 COG STAC item
+    doc: Water bodies detection based on NDWI and otsu threshold applied to a pair of Landsat-8/9 acquisitions
     requirements: []
     inputs:
       aoi:
@@ -34,7 +34,9 @@ $graph:
         label: STAC item reference
         type: Directory
     outputs:
-      - id: stac_catalog
+      - id: water_bodies
+        label: Water bodies detected
+        doc: Water bodies detected based on the NDWI and otsu threshold
         outputSource:
           - step/stac-catalog
         type: Directory
