@@ -30,7 +30,7 @@ outputs:
       loadContents: true
       outputEval: |
         ${ 
-          return { "href": self[0].contents };
+          return { "value": self[0].contents };
         }
 stdout: catalog-uri.txt
 baseCommand:

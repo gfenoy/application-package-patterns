@@ -21,7 +21,7 @@ baseCommand:
 - python
 - stage.py
 arguments:
-- $( inputs.reference.href )
+- $( inputs.reference.value )
 - $( inputs.another_input ) # This is an additional input to demonstrate the use of multiple inputs
 requirements:
   SchemaDefRequirement:

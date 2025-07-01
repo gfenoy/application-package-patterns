@@ -28,7 +28,7 @@ name = "pattern-1-test"
 description = "Test case for pattern-1"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -65,8 +65,8 @@ name = "pattern-2-test"
 description = "Test case for pattern-2"
 
 [workflows.tests.params]
-item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
-item_2 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }
+item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item_2 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -103,8 +103,8 @@ name = "pattern-3-test"
 description = "Test case for pattern-3"
 
 [workflows.tests.params]
-items = [{"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" },
-         {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }]
+items = [{"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" },
+         {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }]
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -142,7 +142,7 @@ name = "pattern-4-test"
 description = "Test case for pattern-4"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -180,7 +180,7 @@ name = "pattern-5-test"
 description = "Test case for pattern-5"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -218,7 +218,7 @@ name = "pattern-6-test"
 description = "Test case for pattern-6"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -255,8 +255,8 @@ name = "pattern-7-test-optional-input-set"
 description = "Test case for pattern-7"
 
 [workflows.tests.params]
-item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
-item_2 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }
+item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item_2 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -290,7 +290,7 @@ name = "pattern-7-test-optional-input-not-set"
 description = "Test case for pattern-7 - optional input not set"
 
 [workflows.tests.params]
-item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item_1 = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -329,7 +329,7 @@ name = "pattern-8-test"
 description = "Test case for pattern-8 with produce_output set to false"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -365,7 +365,7 @@ name = "pattern-8-test-produce-output"
 description = "Test case for pattern-8 with produce_output set to true"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 bands = ["green", "nir08"]
 epsg = "EPSG:4326"
@@ -405,7 +405,7 @@ name = "pattern-9-test-no-optional-output"
 description = "Test case for pattern-9 with no optional output"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 epsg = "EPSG:4326"
 indexes = ["ndwi", "ndwi"]
@@ -440,7 +440,7 @@ name = "pattern-9-test-optional-output"
 description = "Test case for pattern-9 with optional output"
 
 [workflows.tests.params]
-item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
 aoi = "-118.985,38.432,-118.183,38.938"
 epsg = "EPSG:4326"
 indexes = ["ndwi", "ndwi", "none"]
@@ -479,8 +479,8 @@ name = "pattern-10-test"
 description = "Test case for pattern-10"
 
 [workflows.tests.params]
-item = [{"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" },
-         {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "href" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }]
+item = [{"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" },
+         {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" }]
 aoi = "-118.985,38.432,-118.183,38.938"
 epsg = "EPSG:4326"
 vegetation_index = ["ndwi", "ndwi"]
