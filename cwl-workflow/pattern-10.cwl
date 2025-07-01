@@ -17,7 +17,7 @@ $graph:
   - class: Workflow
     id: pattern-10
     label: NDVI and NDWI vegetation indexes
-    doc: NDVI and NDWI vegetation indexes
+    doc: NDVI and NDWI vegetation indexes from Landsat-8/9 acquisitions
     requirements:
       SubworkflowFeatureRequirement: {}
       ScatterFeatureRequirement: {}
@@ -37,14 +37,14 @@ $graph:
         type: string[]
         default: ["ndvi", "ndwi"]
       item:
-        doc: Reference to a STAC item
-        label: STAC item reference
+        doc: Landsat-8/9 acquisition reference
+        label: Landsat-8/9 acquisition reference
         type: Directory[]
 
     outputs:
     - id: vegetation_indexes
       label: Vegetation indexes
-      doc: Vegetation indexes
+      doc: Vegetation indexes from Landsat-8/9 acquisitions
       outputSource:
         - flatten/flat
       type:

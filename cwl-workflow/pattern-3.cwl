@@ -27,8 +27,8 @@ $graph:
         type: string[]
         default: ["green", "nir08"]
       items:
-        doc: Reference to a STAC item
-        label: STAC item reference
+        doc: Landsat-8/9 acquisition reference
+        label: Landsat-8/9 acquisition reference
         type: Directory[]
     outputs:
       - id: water_bodies

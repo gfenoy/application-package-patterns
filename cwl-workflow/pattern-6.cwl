@@ -18,7 +18,7 @@ $graph:
   - class: Workflow
     id: pattern-6
     label: NDVI mean
-    doc: NDVI mean
+    doc: NDVI mean from Landsat-8/9 acquisitions
     requirements:
       ScatterFeatureRequirement: {}
     inputs:
@@ -32,8 +32,8 @@ $graph:
         type: string
         default: "EPSG:4326"
       item:
-        doc: Reference to a STAC item
-        label: STAC item reference
+        doc: Landsat-8/9 acquisition reference
+        label: Landsat-8/9 acquisition reference
         type: Directory
     outputs:
       - id: mean

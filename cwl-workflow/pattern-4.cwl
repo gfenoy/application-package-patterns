@@ -8,7 +8,7 @@ $graph:
   - class: Workflow
     id: pattern-4
     label: NDVI and NDWI vegetation indexes
-    doc: NDVI and NDWI vegetation indexes
+    doc: NDVI and NDWI vegetation indexes from Landsat-8/9 acquisitions
     requirements: []
     inputs:
       aoi:
@@ -21,8 +21,8 @@ $graph:
         type: string
         default: "EPSG:4326"
       item:
-        doc: Reference to a STAC item
-        label: STAC item reference
+        doc: Landsat-8/9 acquisition reference
+        label: Landsat-8/9 acquisition reference
         type: Directory
     outputs:
       - id: ndvi
