@@ -28,12 +28,13 @@ requirements:
     types:
     - $import: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml
   DockerRequirement:
-    dockerPull: ghcr.io/eoap/dask-app-package/cloudless-mosaic:1.0.1
+    dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0
   InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
       - entryname: stage.py
         entry: |-
+          import sys
           import requests
           import planetary_computer
 
