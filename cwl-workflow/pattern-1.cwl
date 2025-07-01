@@ -30,7 +30,9 @@ $graph:
         label: STAC item reference
         type: Directory
     outputs:
-      - id: stac_catalog
+      - id: water_bodies
+        label: Water bodies detected
+        doc: Water bodies detected based on the NDWI and otsu threshold
         outputSource:
           - step/stac-catalog
         type: Directory
