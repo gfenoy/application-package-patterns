@@ -30,7 +30,7 @@ outputs:
       loadContents: true
       outputEval: |
         ${ 
-          return { "value": self[0].contents };
+          return { "value": self[0].contents, "type": "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI" };
         }
 stdout: catalog-uri.txt
 baseCommand:
