@@ -25,7 +25,7 @@ tasks:
     cmds:
       - |
         var="{{.VAR}}"
-        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-${var}.cwl 
+        s="clt" t="ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.1" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' -i cwl-workflow/pattern-${var}.cwl 
         eoap-cwlwrap \
           --directory-stage-in templates/stage-in.cwl \
           --file-stage-in templates/stage-in-file.cwl \

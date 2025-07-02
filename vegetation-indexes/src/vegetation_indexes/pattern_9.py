@@ -118,12 +118,14 @@ def pattern_9(item_url, aoi, epsg, vegetation_index):
         with_raster=True,
     )
     
+    os.makedirs("./output", exist_ok=True)
+
     cat.add_items([out_item])
 
     cat.normalize_and_save(
-        root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
+        root_href="./output", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
-    shutil.copy(f"{name}.tif", os.path.join(name, f"{name}.tif"))
+    shutil.copy(f"{name}.tif", os.path.join("output", name, f"{name}.tif"))
     os.remove(f"{name}.tif")
 
     logger.info("Done!")

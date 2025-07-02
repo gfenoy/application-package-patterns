@@ -34,7 +34,7 @@ $graph:
         label: indexes
         doc: indexes to compute
         type: string[]
-        default: ["ndvi", "ndwi", "none"]
+        default: ["ndvi", "none"]
       item:
         doc: Landsat-8/9 acquisition reference
         label: Landsat-8/9 acquisition reference
@@ -98,7 +98,7 @@ $graph:
     outputs:
       vegetation_index:
         outputBinding:
-            glob: . 
+            glob: output 
         type: Directory?
 
 

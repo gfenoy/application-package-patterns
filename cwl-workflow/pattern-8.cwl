@@ -43,6 +43,7 @@ $graph:
         doc: Flag to produce the output
         label: Flag to produce the output
         type: boolean?
+        default: false
     outputs:
       - id: water_bodies
         label: Water bodies detected
@@ -105,7 +106,7 @@ $graph:
     outputs:
       stac-catalog:
         outputBinding:
-            glob: .
-        type: Directory
+            glob: output
+        type: Directory?
 
 

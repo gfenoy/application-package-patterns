@@ -128,7 +128,7 @@ def pattern_8(item_url, aoi, bands, epsg, produce_output):
     cat.add_items([out_item])
 
     cat.normalize_and_save(
-        root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
+        root_href="./output", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
 
     logger.info("Done!")
