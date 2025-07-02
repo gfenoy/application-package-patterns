@@ -53,7 +53,7 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     "dem",
     help="Digital Elevation Model (DEM) geotiff",
     required=True,
-    multiple=True,
+    multiple=False,
 )
 def pattern_11(item_url, aoi, bands, epsg, dem):
 
@@ -100,9 +100,7 @@ def pattern_11(item_url, aoi, bands, epsg, dem):
         logger.info("Write otsu.tif")
         dst_dataset.write(water_bodies, indexes=1)
 
-    logger.info("Creating a STAC Catalog")
-    cat = pystac.Catalog(id="catalog", description="water-bodies")
-
+    
     if os.path.isdir(item_url):
         catalog = pystac.read_file(os.path.join(item_url, "catalog.json"))
         item = next(catalog.get_items())
@@ -124,26 +122,36 @@ def pattern_11(item_url, aoi, bands, epsg, dem):
     )
 
     # DEM
+    logger.info(f"Cropping DEM {dem} {type(dem)}")
     input_dem_asset = pystac.Asset(
         href=dem,
         title="Digital Elevation Model",
     )
 
     out_image, out_meta = crop(input_dem_asset, bbox, epsg)
-    cropped_assets["dem"] = out_image[0]
+
+    with rasterio.open("dem.tif", "w", **out_meta) as dst_dataset:
+        logger.info("Write dem.tif")
+        dst_dataset.write(out_image[0], indexes=1)
 
     dem_asset = pystac.Asset(
-        href=os.path.basename(dem),
+        href=os.path.basename("dem.tif"),
         title="Digital Elevation Model",
         media_type=pystac.MediaType.GEOTIFF,
+        roles=["data", "visual"],
     )
 
     out_item.add_asset(
         "dem",
         dem_asset,
     )
-
+    shutil.copy("dem.tif", item.id)
+    os.remove("dem.tif")
     os.remove(water_body)
+
+    logger.info("Creating a STAC Catalog")
+    cat = pystac.Catalog(id="catalog", description="water-bodies")
+
     cat.add_items([out_item])
 
     cat.normalize_and_save(
