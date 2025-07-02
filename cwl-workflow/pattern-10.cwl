@@ -26,6 +26,7 @@ $graph:
         label: area of interest
         doc: area of interest as a bounding box
         type: string
+        default: "-118.985,38.432,-118.183,38.938"
       epsg:
         label: EPSG code
         doc: EPSG code
@@ -36,7 +37,7 @@ $graph:
         doc: indexes to compute
         type: string[]
         default: ["ndvi", "ndwi"]
-      item:
+      items:
         doc: Landsat-8/9 acquisition reference
         label: Landsat-8/9 acquisition reference
         type: Directory[]

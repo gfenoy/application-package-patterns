@@ -16,6 +16,7 @@ $graph:
         label: area of interest
         doc: area of interest as a bounding box
         type: string
+        default: "-118.985,38.432,-118.183,38.938"
       epsg:
         label: EPSG code
         doc: EPSG code

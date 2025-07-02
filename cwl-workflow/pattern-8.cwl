@@ -25,6 +25,7 @@ $graph:
         label: area of interest
         doc: area of interest as a bounding box
         type: string
+        default: "-118.985,38.432,-118.183,38.938"
       epsg:
         label: EPSG code
         doc: EPSG code
@@ -42,7 +43,7 @@ $graph:
       produce_output:
         doc: Flag to produce the output
         label: Flag to produce the output
-        type: boolean?
+        type: boolean
         default: false
     outputs:
       - id: water_bodies
@@ -101,7 +102,7 @@ $graph:
             inputBinding:
               prefix: '--band'
       produce_output:
-        type: boolean?
+        type: boolean
 
     outputs:
       stac-catalog:
