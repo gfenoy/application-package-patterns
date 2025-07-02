@@ -6,7 +6,7 @@ schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
 $graph:
   - class: Workflow
-    id: pattern-1
+    id: pattern-11
     label: Water bodies detection based on NDWI and the otsu threshold (with DEM)
     doc: Water bodies detection based on NDWI and otsu threshold applied to a single Landsat-8/9 acquisition
     requirements: []
