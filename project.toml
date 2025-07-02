@@ -508,3 +508,43 @@ stdout = "results.json"
 stderr = "app.log"
 tmp_outdir_prefix = "tmp"
 outdir = "results"
+
+
+
+[[workflows]]
+path = "wrapped-cwl-workflow/pattern-11.cwl"
+
+[[workflows.tests]]
+name = "pattern-1-test"
+description = "Test case for pattern-11"
+
+[workflows.tests.params]
+item = {"class" = "https://raw.githubusercontent.com/eoap/schemas/main/url.yaml#URL", "value" = "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_042033_20231007_02_T1" }
+aoi = "-118.985,38.432,-118.183,38.938"
+bands = ["green", "nir08"]
+epsg = "EPSG:4326"
+dem = "https://elevationeuwest.blob.core.windows.net/copernicus-dem/COP30_hh/Copernicus_DSM_COG_10_N38_00_W119_00_DEM.tif"
+
+another_input = "a_value"
+
+s3_bucket = "results"
+sub_path = "pattern-1"
+aws_access_key_id = "test"
+aws_secret_access_key = "test"
+region_name = "us-east-1"
+endpoint_url = "http://eoap-application-package-patterns-localstack:4566"
+
+[workflows.tests.execution.cluster]
+usage_report = "usage.json"
+pool_logs_basepath = "logs"
+max_ram = "4G"
+max_cores = 8
+pod_serviceaccount = "calrissian-sa"
+tool_logs_basepath = "logs"
+
+[workflows.tests.execution.paths]
+volume = "/calrissian/pattern-1"
+stdout = "results.json"
+stderr = "app.log"
+tmp_outdir_prefix = "tmp"
+outdir = "results"
