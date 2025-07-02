@@ -55,7 +55,7 @@ $graph:
       subworkflow:
         run: "#vegetation_indexes"
         in:
-          item: item
+          item: items
           aoi: aoi
           epsg: epsg
           indexes: indexes
