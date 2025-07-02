@@ -67,7 +67,7 @@ $graph:
     baseCommand: 
     - vegetation-index
     arguments:
-    - pattern-1
+    - pattern-11
     inputs:
       item:
         type: Directory

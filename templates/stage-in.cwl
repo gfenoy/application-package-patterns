@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 
 class: CommandLineTool
-id: my-asthonishing-stage-in
+id: my-asthonishing-stage-in-directory
 
 inputs:
   reference:
