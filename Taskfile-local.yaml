@@ -110,7 +110,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-1.cwl#water-bodies-detection .params.yaml
+        cwltool cwl-workflow/pattern-1.cwl#pattern-1 .params.yaml
     silent: false
 
   pattern-2:
@@ -139,7 +139,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-2.cwl .params.yaml
+        cwltool cwl-workflow/pattern-2.cwl#pattern-2 .params.yaml
     silent: false
 
   pattern-3:
@@ -166,7 +166,7 @@ tasks:
         echo '- {"class": "Directory", "path": "data/LC08_L2SP_042033_20231007_02_T1"}' >> .params.yaml
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
-        cwltool cwl-workflow/pattern-3.cwl .params.yaml
+        cwltool cwl-workflow/pattern-3.cwl#pattern-3 .params.yaml
     silent: false
 
   pattern-4:
@@ -189,7 +189,7 @@ tasks:
         echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
-        cwltool cwl-workflow/pattern-4.cwl .params.yaml
+        cwltool cwl-workflow/pattern-4.cwl#pattern-4 .params.yaml
     silent: false
 
   pattern-5:
@@ -214,7 +214,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'vegetation_index: ["ndwi", "ndwi"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-5.cwl .params.yaml
+        cwltool cwl-workflow/pattern-5.cwl#pattern-5 .params.yaml
     silent: false
 
   pattern-6:
@@ -237,7 +237,7 @@ tasks:
         echo 'item: {"class": "Directory", "path": "data/LC09_L2SP_042033_20231015_02_T1"}' > .params.yaml
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
-        cwltool cwl-workflow/pattern-6.cwl .params.yaml
+        cwltool cwl-workflow/pattern-6.cwl#pattern-6 .params.yaml
     silent: false
 
   pattern-7a:
@@ -267,7 +267,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-7.cwl .params.yaml
+        cwltool cwl-workflow/pattern-7.cwl#pattern-7 .params.yaml
     silent: false
 
   pattern-7b:
@@ -295,7 +295,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-7.cwl .params.yaml
+        cwltool cwl-workflow/pattern-7.cwl#pattern-7 .params.yaml
     silent: false
 
   pattern-8a:
@@ -325,7 +325,7 @@ tasks:
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
         echo 'produce_output: true' >> .params.yaml
-        cwltool cwl-workflow/pattern-8.cwl#water-bodies-detection .params.yaml
+        cwltool cwl-workflow/pattern-8.cwl#pattern-8 .params.yaml
     silent: false
 
   pattern-8b:
@@ -354,7 +354,7 @@ tasks:
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'band: ["green", "nir08"]' >> .params.yaml
         echo 'produce_output: false' >> .params.yaml
-        cwltool cwl-workflow/pattern-8.cwl#water-bodies-detection .params.yaml
+        cwltool cwl-workflow/pattern-8.cwl#pattern-8 .params.yaml
     silent: false
     
   pattern-9a:
@@ -381,7 +381,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'indexes: ["ndwi", "ndwi"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl#pattern-9 .params.yaml
     silent: false
     
 
@@ -409,7 +409,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'indexes: ["ndwi", "ndwi", "none"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl#pattern-9 .params.yaml
     silent: false
 
 
@@ -423,7 +423,7 @@ tasks:
         echo 'aoi: "-118.985,38.432,-118.183,38.938"' >> .params.yaml
         echo 'epsg: "EPSG:4326"' >> .params.yaml
         echo 'indexes: ["none", "none", "none"]' >> .params.yaml
-        cwltool cwl-workflow/pattern-9.cwl .params.yaml
+        cwltool cwl-workflow/pattern-9.cwl#pattern-9 .params.yaml
     silent: false
 
   pattern-10:

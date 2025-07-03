@@ -81,7 +81,7 @@ $graph:
     arguments:
     - pattern-8
     - valueFrom: |
-          ${ return inputs.produce_output ? "--produce-output"; }
+          ${ return inputs.produce_output ? "--produce-output": null ; }
     inputs:
       item:
         type: Directory
