@@ -28,7 +28,7 @@ requirements:
     types:
     - $import: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml
   DockerRequirement:
-    dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.0
+    dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.1.1
   InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
