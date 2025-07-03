@@ -84,3 +84,8 @@ tasks:
     vars:
       VAR: 9
 
+  pattern-11:
+  - task: local:pattern-11-wrap
+  - task: remote:test-by-index
+    vars:
+      VAR: 10
