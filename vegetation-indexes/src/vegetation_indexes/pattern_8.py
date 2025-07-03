@@ -110,8 +110,8 @@ def pattern_8(item_url, aoi, bands, epsg, produce_output):
     else:
         item = pystac.read_file(item_url)
 
-    os.makedirs(item.id, exist_ok=True)
-    shutil.copy(water_body, item.id)
+    os.makedirs(os.path.join("output", item.id), exist_ok=True)
+    shutil.copy(water_body, os.path.join("output", item.id))
 
     out_item = rio_stac.stac.create_stac_item(
         source=water_body,
