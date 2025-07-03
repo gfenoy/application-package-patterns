@@ -84,6 +84,11 @@ tasks:
       vars:
         VAR: 10
 
+  pattern-11-wrap:
+    - task: wrap-by-index
+      vars:
+        VAR: 11
+
 
   pattern-1:
     desc: |
