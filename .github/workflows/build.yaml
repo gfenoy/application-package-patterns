@@ -142,13 +142,13 @@ jobs:
     - name: Push CWL as OCI Artifact to GHCR
       run: |
         set -x
-        FILE=downloads/${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
+        cd downloads
+        FILE=${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         NAME=ghcr.io/eoap/application-package-patterns/${{matrix.step}}:${{needs.version.outputs.app-version}}
         
         echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io -u ${{ github.actor }} --password-stdin
 
         oras push "$NAME" \
-          --artifact-type application/vnd.commonwl.cwl \
-          --media-type text/yaml \
-          "$FILE"
+          --artifact-type application/cwl \
+          "$FILE:application/cwl"
 
