@@ -152,3 +152,10 @@ jobs:
           --artifact-type application/cwl \
           "$FILE:application/cwl"
 
+        echo "${{ secrets.CR_PASSWORD }}" | oras login <your-registry-domain> -u "${{ secrets.CR_USERNAME }}" --password-stdin
+
+        NAME=cr.terradue/com/awf-ap/${{matrix.step}}:${{needs.version.outputs.app-version}}
+
+        oras push "$NAME" \
+          --artifact-type application/cwl \
+          "$FILE:application/cwl"
