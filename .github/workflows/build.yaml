@@ -159,7 +159,7 @@ jobs:
         FILE=${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         NAME=${{ secrets.CR_REPO }}/${{ secrets.CR_PROJECT }}/${{matrix.step}}:${{needs.version.outputs.app-version}}
 
-        echo "${{ secrets.CR_PASSWORD }}" | oras login "cr.terradue.com" -u "${{ secrets.CR_USERNAME }}" --password-stdin --debug
+        echo "${{ secrets.CR_PASSWORD }}" | oras login "cr.terradue.com" -u "robot\$awf-ap" --password-stdin --debug
 
         oras push "$NAME" \
           --artifact-type application/cwl \
