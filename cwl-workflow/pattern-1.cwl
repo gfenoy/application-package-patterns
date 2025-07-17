@@ -1,6 +1,10 @@
 cwlVersion: v1.0
 $namespaces:
   s: https://schema.org/
+
+schemas:
+  - http://schema.org/version/9.0/schemaorg-current-http.rdf
+
 s:softwareVersion: 1.0.0
 
 s:applicationCategory: "Earth Observation application package"
@@ -12,9 +16,31 @@ s:additionalProperty:
     s:name: domain
     s:value: hydrology
 
-schemas:
-  - http://schema.org/version/9.0/schemaorg-current-http.rdf
+s:thumbnail: 
+  s:@type: s:ImageObject
+  s:contentUrl: "https://s3.waw3-2.cloudferro.com/swift/v1/stac-png/S2_L2A.jpg"
+  s:caption: "Water bodies detected based on the NDWI and otsu threshold"
+  s:encodingFormat: "image/jpeg"
+  s:height: "360"
+  s:width: "640"
 
+
+s:license: "https://creativecommons.org/licenses/by/4.0/"
+
+s:documentation:
+  - s:@type: s:CreativeWork
+    s:name: "User Manual"
+    s:url: "https://eoap.github.io/application-package-patterns/"
+    s:encodingFormat: "text/html"
+
+s:author:
+  s:@type: s:Person
+  s:name: "John Doe"
+  s:affiliation:
+    s:@type: s:Organization
+    s:name: "Make EO Great Again Platform"
+  s:email: "john.doe@meogap.org"
+  
 $graph:
   - class: Workflow
     id: pattern-1
