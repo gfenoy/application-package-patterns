@@ -25,7 +25,11 @@ s:thumbnail:
   s:width: "640"
 
 
-s:license: "https://creativecommons.org/licenses/by/4.0/"
+s:license:
+  s:@type: s:CreativeWork
+  s:name: "License CC BY 4.0"
+  s:url: "https://creativecommons.org/licenses/by/4.0/"
+  s:encodingFormat: "text/html"
 
 s:documentation:
   - s:@type: s:CreativeWork
