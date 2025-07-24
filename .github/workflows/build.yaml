@@ -97,7 +97,7 @@ jobs:
 
     strategy:
       matrix:
-        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10]
+        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11]
 
     steps:
     - uses: actions/checkout@v2
