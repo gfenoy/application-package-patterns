@@ -74,19 +74,25 @@ $graph:
       InlineJavascriptRequirement: {}
       EnvVarRequirement:
         envDef:
-          PATH: $PATH:/app/envs/vegetation-index/bin
+          PATH: $PATH:/app/envs/vegetation-index/bin:/usr/bin
       ResourceRequirement:
         coresMax: 1
         ramMax: 256
     
       DockerRequirement:
-        dockerPull: docker.io/library/vegetation-indexes:latest
+        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes@sha256:db75818d12e3ea05b583ff53e32cd291fc3d40a62ae8cb53d51573c56813f1b6
 
-    baseCommand: [bash, -c]
+    baseCommand: 
+    - echo
     arguments:
-      - |
-        echo "$0 $1 $2 $3 $4 $5 $6"
-
+      - $(inputs.null_input)
+      - $(inputs.boolean_input)
+      - $(inputs.int_input)
+      - $(inputs.long_input)
+      - $(inputs.float_input)
+      - $(inputs.double_input)
+      - $(inputs.string_input)
+ 
     inputs:
       null_input:
         type: ["null", "string"]
