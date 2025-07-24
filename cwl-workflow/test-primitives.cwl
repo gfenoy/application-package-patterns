@@ -12,7 +12,7 @@ $graph:
     class: Workflow
     label: Echo All CWL Primitive Types
     doc: This workflow demonstrates usage of all CWL primitive types. It runs the `echo-tool` with default values and captures the output in a file.
-
+    requirements: []
     inputs:
     - id: null_input
       type: ["null", "string"]
