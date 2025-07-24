@@ -60,15 +60,15 @@ $graph:
 
     steps:
       echo_step:
-        run: "#echo-tool"
+        run: "#clt"
         in: {}
         out:
         - echoed
 
-  - id: echo-tool
-    class: CommandLineTool
+  - class: CommandLineTool
     label: Echo Primitive Types Tool
     doc: A tool that echoes all primitive CWL types null, boolean, int, long, float, double, and string. The values are written to a file called `echoed.txt`.
+    id: clt
 
     requirements:
       InlineJavascriptRequirement: {}
