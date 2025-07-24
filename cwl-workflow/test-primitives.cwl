@@ -8,7 +8,7 @@ schemas:
 s:softwareVersion: 1.0.0
 
 $graph:
-  - id: echo-workflow
+  - id: test-primitives
     class: Workflow
     label: Echo All CWL Primitive Types
     doc: This workflow demonstrates usage of all CWL primitive types. It runs the `echo-tool` with default values and captures the output in a file.
