@@ -2,6 +2,14 @@ cwlVersion: v1.0
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 1.0.0
+s:applicationCategory: "Earth Observation application package"
+s:additionalProperty:
+  - s:@type: s:PropertyValue
+    s:name: application-type
+    s:value: delineation
+  - s:@type: s:PropertyValue
+    s:name: domain
+    s:value: hydrology
 schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
 $graph:

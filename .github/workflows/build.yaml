@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11]
+        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, test-primitives, test-custom-types]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -97,7 +97,7 @@ jobs:
 
     strategy:
       matrix:
-        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10]
+        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, test-primitives, test-custom-types]
 
     steps:
     - uses: actions/checkout@v2
@@ -135,3 +135,32 @@ jobs:
         asset_path: downloads/${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         asset_name: ${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         asset_content_type: text/yaml
+    
+    - name: Setup ORAS CLI
+      uses: oras-project/setup-oras@v1
+    
+    - name: Push CWL as OCI Artifact to GHCR
+      run: |
+        set -x
+        cd downloads
+        FILE=${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
+        NAME=ghcr.io/eoap/application-package-patterns/${{matrix.step}}:${{needs.version.outputs.app-version}}
+        
+        echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io -u ${{ github.actor }} --password-stdin
+
+        oras push "$NAME" \
+          --artifact-type application/cwl \
+          "$FILE:application/cwl"
+
+    - name: Push CWL as OCI Artifact to harbor
+      run: |
+        set -x
+        cd downloads
+        FILE=${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
+        NAME=${{ secrets.CR_REPO }}/${{ secrets.CR_PROJECT }}/${{matrix.step}}:${{needs.version.outputs.app-version}}
+
+        echo "${{ secrets.CR_PASSWORD }}" | oras login "${{ secrets.CR_REPO }}" -u "${{ secrets.CR_USERNAME }}" --password-stdin
+
+        oras push "$NAME" \
+          --artifact-type application/cwl \
+          "$FILE:application/cwl"
