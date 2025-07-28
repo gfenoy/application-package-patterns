@@ -109,7 +109,7 @@ $graph:
                 throw "Invalid bbox length: bbox must have either 4 or 6 elements.";
               }
               // Convert bbox array to a space-separated string for echo
-              return inputs.bbox.bbox.join(' ') + " CRS: " + inputs.bbox.crs;
+              return inputs.bbox.bbox.join(" ") + " CRS: " + inputs.bbox.crs;
             }
       
       point_of_interest:
@@ -119,12 +119,12 @@ $graph:
         inputBinding:
           valueFrom: |
             ${
-              // Validate if type is 'Point'
-              if (inputs.point_of_interest.type !== 'Point') {
-                throw "Invalid GeoJSON type: expected 'Point', got '" + inputs.point_of_interest.type + "'";
+              // Validate if type is Point
+              if (inputs.point_of_interest.type !== "Point") {
+                throw "Invalid GeoJSON type: expected \"Point\", got \"" + inputs.point_of_interest.type + "\"";
               }
               var coordinates = inputs.point_of_interest.coordinates;
-              return "Point Coordinates: " + coordinates.join(', ');
+              return "Point Coordinates: " + coordinates.join(", ");
             }
       aoi:
         type: https://raw.githubusercontent.com/eoap/schemas/main/geojson.yaml#Feature
@@ -133,12 +133,12 @@ $graph:
         inputBinding:
           valueFrom: |
             ${
-              // Validate if type is 'Feature'
-              if (inputs.aoi.type !== 'Feature') {
-                throw "Invalid GeoJSON type: expected 'Feature', got '" + inputs.aoi.type + "'";
+              // Validate if type is Feature
+              if (inputs.aoi.type !== "Feature") {
+                throw "Invalid GeoJSON type: expected \"Feature\", got \"" + inputs.aoi.type + "\"";
               }
               // get the Feature geometry type
-              return "Feature with id '" + inputs.aoi.id + "' is of type: " + inputs.aoi.geometry.type;
+              return "Feature with id \"" + inputs.aoi.id + "\" is of type: " + inputs.aoi.geometry.type;
             }
 
       start_time:
