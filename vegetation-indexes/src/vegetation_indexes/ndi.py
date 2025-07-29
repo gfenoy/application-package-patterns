@@ -94,6 +94,18 @@ def ndi_cli(item_1, item_2, ls9_item, collection_url):
         with_raster=True,
     )
 
+    out_item.properties["renders"] = {
+        "ndwi": {
+            "title": "Normalized Difference Water Index",
+            "assets": ["data"],
+            "nodata": "0",
+            "resampling": "nearest",
+			"rescale": [[-1,1]],
+			"colormap_name": "blues_r"
+        }
+    }
+
+
     if collection:
         logger.info(f"Adding collection {collection.id} to the output item")
         out_item.collection_id = collection.id

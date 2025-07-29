@@ -88,6 +88,18 @@ def otsu_cli(item_ndi, ls9_item, collection_url):
         asset_name="data",
     )
 
+    out_item.properties["renders"] = {
+        "overview": {
+            "title": "Detected Water Bodies",
+            "assets": ["data"],
+            "nodata": 0,
+            "colormap": {
+                "1": "0000FF",       
+            },
+            "resampling": "nearest"
+        }
+    }
+
     if collection:
         logger.info(f"Adding collection {collection.id} to the output item")
         out_item.collection_id = collection.id
