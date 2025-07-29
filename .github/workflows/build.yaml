@@ -9,7 +9,7 @@ on:
     # Only rebuild website when apps have changed
     - 'cwl-workflow/**'
     - .github/**
-    - vegetation-indexes/**
+    - runner/**
     - codemeta.json
 jobs:
   validate:
@@ -123,7 +123,7 @@ jobs:
     - uses: actions/checkout@v2
     - run: |
         set -x
-        tag="ghcr.io/eoap/application-package-patterns/vegetation-indexes:${{needs.version.outputs.app-version}}"
+        tag="ghcr.io/eoap/application-package-patterns/runner:${{needs.version.outputs.app-version}}"
         docker pull ${tag}
         shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
         s="clt" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).requirements.DockerRequirement.dockerPull = env(t)' cwl-workflow/${{matrix.step}}.cwl
