@@ -44,7 +44,7 @@ COPY --chown=1001:0 . /app
 WORKDIR /app
 
 # Set up virtual environment paths
-ENV VIRTUAL_ENV=/app/envs/vegetation-index
+ENV VIRTUAL_ENV=/app/envs/runner
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV XDG_DATA_HOME=/app/.hatch/share
 ENV XDG_CACHE_HOME=/app/.hatch/cache
@@ -55,7 +55,7 @@ RUN hatch env prune && \
     hatch env create prod && \
     #rm -fr /app/.git /app/.pytest_cache && \
     rm -fr ~/.local && \
-    vegetation-index --help
+    runner --help
 
 WORKDIR /app
 

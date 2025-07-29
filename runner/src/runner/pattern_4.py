@@ -15,7 +15,7 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import (aoi2box, crop, get_asset,
+from runner.functions import (aoi2box, crop, get_asset,
     normalized_difference, get_item)
 
 @click.command(

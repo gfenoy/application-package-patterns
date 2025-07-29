@@ -1,7 +1,7 @@
 # crop CLI
 import os
 import click
-from vegetation_indexes.functions import crop, get_item, get_asset, aoi2box
+from runner.functions import crop, get_item, get_asset, aoi2box
 import pystac
 import rasterio
 from loguru import logger

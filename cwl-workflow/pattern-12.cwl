@@ -97,7 +97,7 @@ $graph:
       - class: InlineJavascriptRequirement
       - class: EnvVarRequirement
         envDef:
-          PATH: /app/envs/vegetation-index/bin
+          PATH: /app/envs/runner/bin
       - class: ResourceRequirement
         coresMax: 1
         ramMax: 512
@@ -109,9 +109,9 @@ $graph:
         networkAccess: true
     hints:
       - class: DockerRequirement
-        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.2.0
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner:0.2.0
     baseCommand: 
-    - vegetation-index
+    - runner
     arguments:
     - crop-cli
     inputs:
@@ -179,7 +179,7 @@ $graph:
       - class: InlineJavascriptRequirement
       - class: EnvVarRequirement
         envDef:
-          PATH: /app/envs/vegetation-index/bin
+          PATH: /app/envs/runner/bin
       - class: ResourceRequirement
         coresMax: 1
         ramMax: 512
@@ -190,9 +190,9 @@ $graph:
         networkAccess: true
     hints:
       - class: DockerRequirement
-        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.2.0
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner:0.2.0
     baseCommand: 
-    - vegetation-index
+    - runner
     arguments:
     - ndi-cli
     inputs:
@@ -238,7 +238,7 @@ $graph:
       - class: InlineJavascriptRequirement
       - class: EnvVarRequirement
         envDef:
-          PATH: /app/envs/vegetation-index/bin
+          PATH: /app/envs/runner/bin
       - class: ResourceRequirement
         coresMax: 1
         ramMax: 512
@@ -249,9 +249,9 @@ $graph:
         networkAccess: true
     hints:
       - class: DockerRequirement
-        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes:0.2.0
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner:0.2.0
     baseCommand: 
-    - vegetation-index
+    - runner
     arguments:
     - otsu-cli
     inputs:

@@ -74,15 +74,15 @@ $graph:
         InlineJavascriptRequirement: {}
         EnvVarRequirement:
           envDef:
-            PATH: $PATH:/app/envs/vegetation-index/bin
+            PATH: $PATH:/app/envs/runner/bin
         ResourceRequirement:
           coresMax: 1
           ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: docker.io/library/vegetation-indexes:latest
-    baseCommand: 
-    - vegetation-index
+        dockerPull: docker.io/library/runner:latest
+    baseCommand:
+    - runner
     arguments:
     - pattern-9
     inputs:

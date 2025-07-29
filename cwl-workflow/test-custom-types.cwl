@@ -74,13 +74,13 @@ $graph:
       InlineJavascriptRequirement: {}
       EnvVarRequirement:
         envDef:
-          PATH: $PATH:/app/envs/vegetation-index/bin:/usr/bin
+          PATH: $PATH:/app/envs/runner/bin:/usr/bin
       ResourceRequirement:
         coresMax: 1
         ramMax: 256
     
       DockerRequirement:
-        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes@sha256:db75818d12e3ea05b583ff53e32cd291fc3d40a62ae8cb53d51573c56813f1b6
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner@sha256:db75818d12e3ea05b583ff53e32cd291fc3d40a62ae8cb53d51573c56813f1b6
       SchemaDefRequirement:
         types:
           - $import: https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml

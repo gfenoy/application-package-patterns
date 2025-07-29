@@ -5,7 +5,7 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import threshold, get_item
+from runner.functions import threshold, get_item
 
 
 @click.command(

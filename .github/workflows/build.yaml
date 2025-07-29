@@ -40,15 +40,33 @@ jobs:
     - id: set-version
       run: echo "::set-output name=version::$APP_VERSION"
 
+  test:
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - run: 
+        pip install .
+        pip install nose2
+    - run: 
+        nose2
+
   container-build:
 
-    needs: version
+    needs: 
+    - version
+    - test
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        step: ['vegetation-indexes']
+        step: ['runner']
 
     steps:
     - uses: actions/checkout@v2

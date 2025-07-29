@@ -5,7 +5,7 @@ import pystac
 import shutil
 import rio_stac
 from loguru import logger
-from vegetation_indexes.functions import normalized_difference, get_item
+from runner.functions import normalized_difference, get_item
 
 @click.command(
     short_help="Nomalized Difference Index CLI",
