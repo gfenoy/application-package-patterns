@@ -1,0 +1,32 @@
+{
+  "type": "Collection",
+  "id": "normalized-difference",
+  "stac_version": "1.1.0",
+  "description": "Normalized difference index collection",
+  "links": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json"
+  ],
+  "title": "Normalized Difference Index",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-07-29T00:00:00Z",
+          "2025-07-29T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary"
+}
