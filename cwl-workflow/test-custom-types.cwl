@@ -101,6 +101,7 @@ $graph:
         label: "Area of interest"
         doc: "Area of interest defined as a bounding box"
         inputBinding:
+          position: 1
           valueFrom: |
             ${
               // Validate the length of bbox to be either 4 or 6
@@ -109,14 +110,16 @@ $graph:
                 throw "Invalid bbox length: bbox must have either 4 or 6 elements.";
               }
               // Convert bbox array to a space-separated string for echo
-              return inputs.bbox.bbox.join(" ") + " CRS: " + inputs.bbox.crs;
+              return "Bbox: " + inputs.bbox.bbox.join(" ") + " CRS: " + inputs.bbox.crs;
             }
+        
       
       point_of_interest:
         type: https://raw.githubusercontent.com/eoap/schemas/main/geojson.yaml#Point
         label: "Point of Interest"
         doc: "Point of interest defined in GeoJSON format"
         inputBinding:
+          position: 2
           valueFrom: |
             ${
               // Validate if type is Point
@@ -131,6 +134,7 @@ $graph:
         label: "Area of interest"
         doc: "Area of interest defined in GeoJSON format"
         inputBinding:
+          position: 3
           valueFrom: |
             ${
               // Validate if type is Feature
@@ -146,6 +150,7 @@ $graph:
         label: "Start Time"
         doc: "Start time in ISO 8601 format"
         inputBinding:
+          position: 4
           valueFrom: |
             ${
               // Parse ISO datetime and extract parts
@@ -170,6 +175,7 @@ $graph:
         label: "Product URI"
         doc: "Product URI in string format"
         inputBinding:
+          position: 5
           valueFrom: |
             ${
               // parse the URI provided in the input
