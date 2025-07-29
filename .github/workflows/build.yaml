@@ -40,7 +40,7 @@ jobs:
     - id: set-version
       run: echo "::set-output name=version::$APP_VERSION"
 
-  test:
+  test-runner:
     needs: version
 
     runs-on: ubuntu-latest
@@ -51,16 +51,18 @@ jobs:
       with:
         python-version: 3.x
     - run: |
+        cd runner
         pip install .
         pip install nose2
     - run: |
+        cd runner
         nose2
 
   container-build:
 
     needs: 
     - version
-    - test
+    - test-runner
 
     runs-on: ubuntu-latest
 
