@@ -94,7 +94,7 @@ $graph:
         InlineJavascriptRequirement: {}
         EnvVarRequirement:
           envDef:
-            PATH: $PATH:/app/envs/vegetation-index/bin
+            PATH: /app/envs/vegetation-index/bin
         ResourceRequirement:
           coresMax: 1
           ramMax: 512
