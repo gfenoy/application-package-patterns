@@ -115,6 +115,18 @@ def pattern_1(item_url, aoi, bands, epsg):
         with_raster=True,
     )
 
+    out_item.properties["renders"] = {
+        "overview": {
+            "title": "Detected Water Bodies",
+            "assets": ["data"],
+            "nodata": 0,
+            "colormap": {
+                "1": "0000FF",       
+            },
+            "resampling": "nearest"
+        }
+    }
+
     os.remove(water_body)
     cat.add_items([out_item])
 
