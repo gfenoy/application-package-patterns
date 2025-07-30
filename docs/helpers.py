@@ -10,7 +10,8 @@ from cwltool.executors import NoopJobExecutor
 from io import StringIO
 from IPython.display import Markdown, display
 from cwl_utils.parser import load_document
-
+from eoap_cwlwrap import wrap
+from eoap_cwlwrap.loader import ( load_workflow, dump_workflow )
 
 def plot_cwl(cwl_file, entrypoint="main"):
     """Plot a CWL file using Graphviz."""
@@ -66,6 +67,9 @@ class WorkflowViewer():
         self.cwl_dict = yaml.safe_load(StringIO(cwl_content))
         self.workflow = load_document(self.cwl_dict, baseuri="file:///", id_=entrypoint)
         self.entrypoint = entrypoint
+        self.output = '.wrapped.cwl'
+        self.base_url = 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main'
+
     def display_inputs(self):
         md = "### Inputs\n"
         headers = ["Id", "Type", "Label", "Doc"]
@@ -101,3 +105,24 @@ class WorkflowViewer():
 
     def plot(self):
         return graphviz.Source(plot_cwl(self.cwl_file, self.entrypoint))
+    
+class WorkflowWrapper():
+    def __init__(self, cwl_file, entrypoint):
+        self.cwl_file = cwl_file
+        self.workflow = load_workflow(path=cwl_file)
+        self.entrypoint = entrypoint
+        self.base_url = 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main'
+
+    def wrap(self):
+        directory_stage_in = load_workflow(path=f"{self.base_url}/templates/stage-in.cwl")
+        file_stage_in = load_workflow(path=f"{self.base_url}/templates/stage-in-file.cwl")
+        workflows_cwl = load_workflow(path=f"{self.base_url}/cwl-workflow/{self.entrypoint}.cwl")
+        stage_out_cwl = load_workflow(path=f"{self.base_url}/templates/stage-out.cwl")
+
+        return wrap(
+            directory_stage_in=directory_stage_in,
+            file_stage_in=file_stage_in,
+            workflows=workflows_cwl,
+            workflow_id=self.entrypoint,
+            stage_out=stage_out_cwl
+        )
