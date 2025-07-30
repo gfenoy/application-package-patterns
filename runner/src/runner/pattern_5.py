@@ -1,20 +1,21 @@
-# ## 9. one input, optional outputs
+# ## 5. one input/scatter on outputs
 
 # The CWL includes: 
 # - one input parameter of type `Directory`
-# - output parameter of type `Directory[]?`
+# - scatter on an output parameter of type `Directory[]`
 
-# This scenario takes as input an acquisition, applies an algorithm and may or may not generate outputs 
+# This scenario takes as input an acquisition, applies an algorithm and generates several outputs
+
+# Implementation: process the NDVI and NDWI taking as input a Landsat-9 acquisition and generating a stack of STAC Catalogs
 
 import os
-import sys
 import click
 import pystac
 import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import (aoi2box, crop, get_asset,
+from runner.functions import (aoi2box, crop, get_asset,
     normalized_difference, get_item)
 
 @click.command(
@@ -42,15 +43,11 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
 @click.option(
     "--vegetation-index",
     "vegetation_index",
-    type=click.Choice(['ndvi', 'ndwi', 'none']),
+    type=click.Choice(['ndvi', 'ndwi']),
     help="Vegetation index to compute",
     required=True,
 )
-def pattern_9(item_url, aoi, epsg, vegetation_index):
-
-    if vegetation_index in ["none"]:
-        logger.info("No vegetation index selected, exiting.")
-        sys.exit(0)
+def pattern_5(item_url, aoi, epsg, vegetation_index):
 
     item = get_item(item_url)
 
@@ -118,14 +115,12 @@ def pattern_9(item_url, aoi, epsg, vegetation_index):
         with_raster=True,
     )
     
-    os.makedirs("./output", exist_ok=True)
-
     cat.add_items([out_item])
 
     cat.normalize_and_save(
-        root_href="./output", catalog_type=pystac.CatalogType.SELF_CONTAINED
+        root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
-    shutil.copy(f"{name}.tif", os.path.join("output", name, f"{name}.tif"))
+    shutil.copy(f"{name}.tif", os.path.join(name, f"{name}.tif"))
     os.remove(f"{name}.tif")
 
     logger.info("Done!")

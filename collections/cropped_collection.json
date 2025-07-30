@@ -1,0 +1,32 @@
+{
+  "type": "Collection",
+  "id": "cropped-bands",
+  "stac_version": "1.1.0",
+  "description": "Cropped nir08 and green bands",
+  "links": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json"
+  ],
+  "title": "Cropped Bands",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-07-29T00:00:00Z",
+          "2025-07-29T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary"
+}

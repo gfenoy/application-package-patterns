@@ -74,13 +74,13 @@ $graph:
       InlineJavascriptRequirement: {}
       EnvVarRequirement:
         envDef:
-          PATH: $PATH:/app/envs/vegetation-index/bin:/usr/bin
+          PATH: $PATH:/app/envs/runner/bin:/usr/bin
       ResourceRequirement:
         coresMax: 1
         ramMax: 256
     
       DockerRequirement:
-        dockerPull: ghcr.io/eoap/application-package-patterns/vegetation-indexes@sha256:db75818d12e3ea05b583ff53e32cd291fc3d40a62ae8cb53d51573c56813f1b6
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner@sha256:db75818d12e3ea05b583ff53e32cd291fc3d40a62ae8cb53d51573c56813f1b6
       SchemaDefRequirement:
         types:
           - $import: https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml
@@ -101,6 +101,7 @@ $graph:
         label: "Area of interest"
         doc: "Area of interest defined as a bounding box"
         inputBinding:
+          position: 1
           valueFrom: |
             ${
               // Validate the length of bbox to be either 4 or 6
@@ -109,14 +110,16 @@ $graph:
                 throw "Invalid bbox length: bbox must have either 4 or 6 elements.";
               }
               // Convert bbox array to a space-separated string for echo
-              return inputs.bbox.bbox.join(" ") + " CRS: " + inputs.bbox.crs;
+              return "Bbox: " + inputs.bbox.bbox.join(" ") + " CRS: " + inputs.bbox.crs;
             }
+        
       
       point_of_interest:
         type: https://raw.githubusercontent.com/eoap/schemas/main/geojson.yaml#Point
         label: "Point of Interest"
         doc: "Point of interest defined in GeoJSON format"
         inputBinding:
+          position: 2
           valueFrom: |
             ${
               // Validate if type is Point
@@ -131,6 +134,7 @@ $graph:
         label: "Area of interest"
         doc: "Area of interest defined in GeoJSON format"
         inputBinding:
+          position: 3
           valueFrom: |
             ${
               // Validate if type is Feature
@@ -146,6 +150,7 @@ $graph:
         label: "Start Time"
         doc: "Start time in ISO 8601 format"
         inputBinding:
+          position: 4
           valueFrom: |
             ${
               // Parse ISO datetime and extract parts
@@ -170,6 +175,7 @@ $graph:
         label: "Product URI"
         doc: "Product URI in string format"
         inputBinding:
+          position: 5
           valueFrom: |
             ${
               // parse the URI provided in the input

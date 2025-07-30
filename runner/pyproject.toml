@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "vegetation-indexes"
+name = "runner"
 dynamic = ["version"]
 description = ''
 readme = "README.md"
@@ -41,38 +41,38 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/Fabrice Brito/vegetation-indexes#readme"
-Issues = "https://github.com/Fabrice Brito/vegetation-indexes/issues"
-Source = "https://github.com/Fabrice Brito/vegetation-indexes"
+Documentation = "https://github.com/eoap/application-package-patterns#readme"
+Issues = "https://github.com/eoap/application-package-patterns/issues"
+Source = "https://github.com/eoap/application-package-patterns"
 
 [tool.hatch.envs.prod]
-path = "/app/envs/vegetation-index"
+path = "/app/envs/runner"
 
 [project.scripts]
-vegetation-index = "vegetation_indexes.app:app_group"
+runner = "runner.app:app_group"
 
 
 [tool.hatch.version]
-path = "src/vegetation_indexes/__about__.py"
+path = "src/runner/__about__.py"
 
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/vegetation_indexes tests}"
+check = "mypy --install-types --non-interactive {args:src/runner tests}"
 
 [tool.coverage.run]
-source_pkgs = ["vegetation_indexes", "tests"]
+source_pkgs = ["runner", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/vegetation_indexes/__about__.py",
+  "src/runner/__about__.py",
 ]
 
 [tool.coverage.paths]
-vegetation_indexes = ["src/vegetation_indexes", "*/vegetation-indexes/src/vegetation_indexes"]
-tests = ["tests", "*/vegetation-indexes/tests"]
+runner = ["src/runner", "*/runner/src/runner"]
+tests = ["tests", "*/runner/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

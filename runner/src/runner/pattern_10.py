@@ -1,12 +1,10 @@
-# ## 5. one input/scatter on outputs
+# ## 10. multiple inputs, multiple outputs
 
 # The CWL includes: 
-# - one input parameter of type `Directory`
-# - scatter on an output parameter of type `Directory[]`
+# - input parameter of type `Directory[]`
+# - output parameter of type `Directory[]`
 
-# This scenario takes as input an acquisition, applies an algorithm and generates several outputs
-
-# Implementation: process the NDVI and NDWI taking as input a Landsat-9 acquisition and generating a stack of STAC Catalogs
+# This scenario takes as input an array of acquisition, applies an algorithm to each of them. 
 
 import os
 import click
@@ -15,7 +13,7 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import (aoi2box, crop, get_asset,
+from runner.functions import (aoi2box, crop, get_asset,
     normalized_difference, get_item)
 
 @click.command(
@@ -47,7 +45,7 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     help="Vegetation index to compute",
     required=True,
 )
-def pattern_5(item_url, aoi, epsg, vegetation_index):
+def pattern_10(item_url, aoi, epsg, vegetation_index):
 
     item = get_item(item_url)
 

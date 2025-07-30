@@ -1,11 +1,13 @@
-# ## scatter on inputs/one output
+# # one input/one output
+
 # The CWL includes: 
-# - scatter on an input parameter of type `Directory[]`
+# - one input parameter of type `Directory`
 # - one output parameter of type `Directory`
 
-# This scenario typically takes as input a stack of acquisitions, applies an aggregation algorithm and produces a result
+# This scenario typically takes one input, applies an algorithm and produces a result
 
-# Implementation: process the NDVI taking as input a stack of Landsat-9 acquisitions producing a STAC Catalog with n STAC Items
+# Implementation: process the NDVI taking as input a Landsat-9 acquisition
+
 
 import os
 import click
@@ -14,7 +16,7 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import (aoi2box, crop, get_asset,
+from runner.functions import (aoi2box, crop, get_asset,
     normalized_difference, threshold, get_item)
 
 @click.command(
@@ -46,11 +48,7 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     required=True,
     multiple=True,
 )
-def pattern_3(item_url, aoi, bands, epsg):
-    
-    logger.info("Creating a STAC Catalog")
-    cat = pystac.Catalog(id="catalog", description="water-bodies")
-
+def pattern_1(item_url, aoi, bands, epsg):
 
     item = get_item(item_url)
 
@@ -94,6 +92,8 @@ def pattern_3(item_url, aoi, bands, epsg):
         logger.info("Write otsu.tif")
         dst_dataset.write(water_bodies, indexes=1)
 
+    logger.info("Creating a STAC Catalog")
+    cat = pystac.Catalog(id="catalog", description="water-bodies")
 
     if os.path.isdir(item_url):
         catalog = pystac.read_file(os.path.join(item_url, "catalog.json"))
@@ -103,7 +103,6 @@ def pattern_3(item_url, aoi, bands, epsg):
 
     os.makedirs(item.id, exist_ok=True)
     shutil.copy(water_body, item.id)
-    
 
     out_item = rio_stac.stac.create_stac_item(
         source=water_body,
@@ -115,6 +114,18 @@ def pattern_3(item_url, aoi, bands, epsg):
         with_proj=True,
         with_raster=True,
     )
+
+    out_item.properties["renders"] = {
+        "overview": {
+            "title": "Detected Water Bodies",
+            "assets": ["data"],
+            "nodata": 0,
+            "colormap": {
+                "1": "0000FF",       
+            },
+            "resampling": "nearest"
+        }
+    }
 
     os.remove(water_body)
     cat.add_items([out_item])

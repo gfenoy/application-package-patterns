@@ -1,10 +1,11 @@
-# ## 10. multiple inputs, multiple outputs
-
+# ## scatter on inputs/one output
 # The CWL includes: 
-# - input parameter of type `Directory[]`
-# - output parameter of type `Directory[]`
+# - scatter on an input parameter of type `Directory[]`
+# - one output parameter of type `Directory`
 
-# This scenario takes as input an array of acquisition, applies an algorithm to each of them. 
+# This scenario typically takes as input a stack of acquisitions, applies an aggregation algorithm and produces a result
+
+# Implementation: process the NDVI taking as input a stack of Landsat-9 acquisitions producing a STAC Catalog with n STAC Items
 
 import os
 import click
@@ -13,12 +14,12 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from vegetation_indexes.functions import (aoi2box, crop, get_asset,
-    normalized_difference, get_item)
+from runner.functions import (aoi2box, crop, get_asset,
+    normalized_difference, threshold, get_item)
 
 @click.command(
-    short_help="Vegetation index computation",
-    help="Vegetation index computation using Landsat-9 data.",
+    short_help="Water bodies detection",
+    help="Detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.",
 )
 @click.option(
     "--input-item",
@@ -39,13 +40,17 @@ from vegetation_indexes.functions import (aoi2box, crop, get_asset,
     required=True,
 )
 @click.option(
-    "--vegetation-index",
-    "vegetation_index",
-    type=click.Choice(['ndvi', 'ndwi']),
-    help="Vegetation index to compute",
+    "--band",
+    "bands",
+    help="Common band name",
     required=True,
+    multiple=True,
 )
-def pattern_10(item_url, aoi, epsg, vegetation_index):
+def pattern_3(item_url, aoi, bands, epsg):
+    
+    logger.info("Creating a STAC Catalog")
+    cat = pystac.Catalog(id="catalog", description="water-bodies")
+
 
     item = get_item(item_url)
 
@@ -53,7 +58,7 @@ def pattern_10(item_url, aoi, epsg, vegetation_index):
 
     cropped_assets = {}
 
-    for band in ["red", "green", "nir08"]:
+    for band in bands:
         asset = get_asset(item, band)
         logger.info(f"Read asset {band} from {asset.get_absolute_href()}")
 
@@ -68,19 +73,9 @@ def pattern_10(item_url, aoi, epsg, vegetation_index):
 
         cropped_assets[band] = out_image[0]
 
-    if vegetation_index == 'ndvi':
-        logger.info("Computing NDVI")
+    nd = normalized_difference(cropped_assets[bands[0]], cropped_assets[bands[1]])
 
-        # Compute NDVI using the NIR and red bands
-        output = normalized_difference(cropped_assets["nir08"], cropped_assets["red"])
-        name = "ndvi"
-
-    if vegetation_index == 'ndwi':
-        logger.info("Computing NDWI")
-
-        # Compute NDWI using the green and NIR bands
-        output = normalized_difference(cropped_assets["green"], cropped_assets["nir08"])
-        name = "ndwi"
+    water_bodies = threshold(nd)
 
     out_meta.update(
         {
@@ -93,32 +88,39 @@ def pattern_10(item_url, aoi, epsg, vegetation_index):
         }
     )
 
-    with rasterio.open(f"{name}.tif", "w", **out_meta) as dst_dataset:
-        logger.info(f"Write output {name}.tif")
-        dst_dataset.write(output, indexes=1)
+    water_body = "otsu.tif"
+
+    with rasterio.open(water_body, "w", **out_meta) as dst_dataset:
+        logger.info("Write otsu.tif")
+        dst_dataset.write(water_bodies, indexes=1)
 
 
-    cat = pystac.Catalog(id="catalog", description=f"{name} vegetation index")
+    if os.path.isdir(item_url):
+        catalog = pystac.read_file(os.path.join(item_url, "catalog.json"))
+        item = next(catalog.get_items())
+    else:
+        item = pystac.read_file(item_url)
 
-    os.makedirs(name, exist_ok=True)
+    os.makedirs(item.id, exist_ok=True)
+    shutil.copy(water_body, item.id)
+    
 
     out_item = rio_stac.stac.create_stac_item(
-        source=f"{name}.tif",
+        source=water_body,
         input_datetime=item.datetime,
-        id=name,
+        id=item.id,
         asset_roles=["data", "visual"],
-        asset_href=os.path.basename(f"{name}.tif"),
+        asset_href=os.path.basename(water_body),
         asset_name="data",
         with_proj=True,
         with_raster=True,
     )
-    
+
+    os.remove(water_body)
     cat.add_items([out_item])
 
     cat.normalize_and_save(
         root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
-    shutil.copy(f"{name}.tif", os.path.join(name, f"{name}.tif"))
-    os.remove(f"{name}.tif")
 
     logger.info("Done!")

@@ -9,14 +9,14 @@ on:
     # Only rebuild website when apps have changed
     - 'cwl-workflow/**'
     - .github/**
-    - vegetation-indexes/**
+    - runner/**
     - codemeta.json
 jobs:
   validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, test-primitives, test-custom-types]
+        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, pattern-12, test-primitives, test-custom-types]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -40,15 +40,35 @@ jobs:
     - id: set-version
       run: echo "::set-output name=version::$APP_VERSION"
 
+  test-runner:
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - run: |
+        cd runner
+        pip install .
+        pip install nose2
+    - run: |
+        cd runner
+        nose2
+
   container-build:
 
-    needs: version
+    needs: 
+    - version
+    - test-runner
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        step: ['vegetation-indexes']
+        step: ['runner']
 
     steps:
     - uses: actions/checkout@v2
@@ -97,13 +117,13 @@ jobs:
 
     strategy:
       matrix:
-        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, test-primitives, test-custom-types]
+        step: [pattern-1, pattern-2, pattern-3, pattern-4, pattern-5, pattern-6, pattern-7, pattern-8, pattern-9, pattern-10, pattern-11, pattern-12, test-primitives, test-custom-types]
 
     steps:
     - uses: actions/checkout@v2
     - run: |
         set -x
-        tag="ghcr.io/eoap/application-package-patterns/vegetation-indexes:${{needs.version.outputs.app-version}}"
+        tag="ghcr.io/eoap/application-package-patterns/runner:${{needs.version.outputs.app-version}}"
         docker pull ${tag}
         shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
         s="clt" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).requirements.DockerRequirement.dockerPull = env(t)' cwl-workflow/${{matrix.step}}.cwl
