@@ -67,7 +67,7 @@ class WorkflowViewer():
         self.workflow = load_document(self.cwl_dict, baseuri="file:///", id_=entrypoint)
         self.entrypoint = entrypoint
     def display_inputs(self):
-        md = "## Inputs\n"
+        md = "### Inputs\n"
         headers = ["Id", "Type", "Label", "Doc"]
         md += "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
@@ -78,7 +78,7 @@ class WorkflowViewer():
         display(Markdown(md))
 
     def display_outputs(self):
-        md = "## Outputs\n"
+        md = "### Outputs\n"
         headers = ["Id", "Type", "Label", "Doc"]
         md += "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
@@ -89,7 +89,7 @@ class WorkflowViewer():
         display(Markdown(md))
 
     def display_steps(self):
-        md = "## Steps\n"
+        md = "### Steps\n"
         headers = ["Id", "Runs", "Label", "Doc"]
         md += "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"

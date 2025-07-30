@@ -81,6 +81,8 @@ $graph:
     steps:
       step:
         run: "#clt"
+        label: Water bodies detection
+        doc: Water bodies detection based on NDWI and otsu threshold applied to a single Landsat-8/9 acquisition
         in:
           item: item
           aoi: aoi
