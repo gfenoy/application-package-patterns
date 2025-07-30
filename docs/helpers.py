@@ -1,9 +1,6 @@
 
 import graphviz
 import yaml
-from cwl_wrapper import app
-from click.testing import CliRunner
-import os
 from cwltool.main import main as cwlmain
 from cwltool.context import LoadingContext, RuntimeContext
 from cwltool.executors import NoopJobExecutor
@@ -11,7 +8,7 @@ from io import StringIO
 from IPython.display import Markdown, display
 from cwl_utils.parser import load_document
 from eoap_cwlwrap import wrap
-from eoap_cwlwrap.loader import ( load_workflow, dump_workflow )
+from eoap_cwlwrap.loader import load_workflow
 import cwl_utils
 
 def plot_cwl(cwl_file, entrypoint="main"):
@@ -33,31 +30,6 @@ def plot_cwl(cwl_file, entrypoint="main"):
     
     return stream_out.getvalue()
 
-
-def wrap_cwl(cwl_file, entrypoint="main"):
-
-    stagein_cwl_file = os.path.join("..", "tests", "templates/stage-in.yaml")
-    stageout_cwl_file = os.path.join("..", "tests","templates/stage-out.yaml")
-    main_cwl_file = os.path.join("..", "tests", "templates/main.yaml")
-    rules_file = os.path.join("..", "tests", "templates/rules.yaml")
-
-    runner = CliRunner()
-    result = runner.invoke(
-        app.main,
-        [
-            "--maincwl",
-            main_cwl_file,
-            "--stagein",
-            stagein_cwl_file,
-            "--stageout",
-            stageout_cwl_file,
-            "--rulez",
-            rules_file,
-            f"{cwl_file}#{entrypoint}",
-        ],
-    )
-
-    return result.output
 
 
 class WorkflowViewer():
