@@ -12,6 +12,7 @@ from IPython.display import Markdown, display
 from cwl_utils.parser import load_document
 from eoap_cwlwrap import wrap
 from eoap_cwlwrap.loader import ( load_workflow, dump_workflow )
+import cwl_utils
 
 def plot_cwl(cwl_file, entrypoint="main"):
     """Plot a CWL file using Graphviz."""
@@ -71,31 +72,37 @@ class WorkflowViewer():
         self.base_url = 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main'
 
     def display_inputs(self):
-        md = "### Inputs\n"
+        
         headers = ["Id", "Type", "Label", "Doc"]
-        md += "| " + " | ".join(headers) + " |\n"
+        md = "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
 
         for inp in self.workflow.inputs:
-            md += f"| `{inp.id.replace(f'file:///#{self.entrypoint}/', '')}` | {inp.type_} | {inp.label} | {inp.doc} |\n"
+            if isinstance(inp.type_, (cwl_utils.parser.cwl_v1_0.InputArraySchema, cwl_utils.parser.cwl_v1_1.InputArraySchema, cwl_utils.parser.cwl_v1_2.InputArraySchema)):
+                inp_type = f"Array of {inp.type_.items}"
+            else:
+                inp_type = inp.type_
+            md += f"| `{inp.id.replace(f'file:///#{self.entrypoint}/', '')}` | {inp_type} | {inp.label} | {inp.doc} |\n"
         
         display(Markdown(md))
 
     def display_outputs(self):
-        md = "### Outputs\n"
         headers = ["Id", "Type", "Label", "Doc"]
-        md += "| " + " | ".join(headers) + " |\n"
+        md = "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
 
         for out in self.workflow.outputs:
-            md += f"| `{out.id.replace(f'file:///#{self.entrypoint}/', '')}` | {out.type_} | {out.label} | {out.doc} |\n"
+            if isinstance(out.type_, (cwl_utils.parser.cwl_v1_0.OutputArraySchema, cwl_utils.parser.cwl_v1_1.OutputArraySchema, cwl_utils.parser.cwl_v1_2.OutputArraySchema)):
+                out_type = f"Array of {out.type_.items}"
+            else:
+                out_type = out.type_
+            md += f"| `{out.id.replace(f'file:///#{self.entrypoint}/', '')}` | {out_type} | {out.label} | {out.doc} |\n"
         
         display(Markdown(md))
 
     def display_steps(self):
-        md = "### Steps\n"
         headers = ["Id", "Runs", "Label", "Doc"]
-        md += "| " + " | ".join(headers) + " |\n"
+        md = "| " + " | ".join(headers) + " |\n"
         md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
 
         for step in self.workflow.steps:
