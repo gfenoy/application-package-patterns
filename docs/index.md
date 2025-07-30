@@ -2,5 +2,5 @@
 
 Application packages expose several patterns in terms of data access and result publishing.
 
-This repository contains CWL descriptions implementing these patterns to verification and validation activities
+This repository contains CWL descriptions implementing these patterns to support verification and validation activities
 
