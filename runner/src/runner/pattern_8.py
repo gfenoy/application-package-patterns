@@ -6,7 +6,7 @@
 
 # This scenario takes as input an acquisition, applies an algorithm and may or may not generate and output 
 
-# Implementation: process the NDVI taking as input a Landsat-9 acquisition with a parameter to create or not the output
+# Implementation: detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.
 
 import os
 import sys

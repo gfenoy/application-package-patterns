@@ -6,8 +6,8 @@
 
 # This scenario may take as input an acquisition, an optional input, applies an algorithm and generates an output
 
-# Implementation: process the NDVI taking as input Landsat-9 acquisitions
-    
+# Implementation: detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.
+
 import os
 import click
 import pystac

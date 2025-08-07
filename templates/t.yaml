@@ -1,0 +1,4 @@
+reference: 
+  class: "https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI"
+  value: "https://elevationeuwest.blob.core.windows.net/copernicus-dem/COP30_hh/Copernicus_DSM_COG_10_N38_00_W119_00_DEM.tif"
+another_input: "2"

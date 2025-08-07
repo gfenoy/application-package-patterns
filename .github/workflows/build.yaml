@@ -51,6 +51,7 @@ jobs:
       with:
         python-version: 3.x
     - run: |
+        pip install .
         cd runner
         pip install .
         pip install nose2
