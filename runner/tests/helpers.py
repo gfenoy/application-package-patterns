@@ -21,7 +21,6 @@ from cwl_loader import (
 from io import StringIO
 from click.testing import CliRunner
 from eoap_cwlwrap import wrap
-from eoap_cwlwrap.loader import ( load_workflow, dump_workflow )
 from pathlib import Path
 
 class TestCWL(unittest.TestCase):

@@ -16,3 +16,4 @@ temp
 .project
 .pydevproject
 /.pytest_cache/
+.venv
