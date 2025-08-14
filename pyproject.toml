@@ -25,25 +25,25 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "eoap-cwlwrap",
+  "eoap-cwlwrap>=0.9.0",
   "nose2", 
   "cwltool",
   "ipykernel",
   "graphviz",
   "cwl-utils",
   "pillow",
-  "cwl-loader",
+  "cwl-loader>=0.2.0",
   "plantuml",
-  "cwl2puml"
+  "cwl2puml>=0.2.0"
 ]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [project.urls]
-Documentation = "https://github.com/Fabrice Brito/stage-in#readme"
-Issues = "https://github.com/Fabrice Brito/stage-in/issues"
-Source = "https://github.com/Fabrice Brito/stage-in"
+Documentation = "https://github.com/eoap/application-package-patterns#README.md"
+Issues = "https://github.com/eoap/application-package-patterns/issues"
+Source = "https://github.com/eoap/application-package-patterns"
 
 [tool.hatch.version]
 path = "patterns/__about__.py"
@@ -51,7 +51,7 @@ path = "patterns/__about__.py"
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
-  "cwl-loader==0.1.0"
+  "cwl-loader>=0.2.0"
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/stage_in tests}"
