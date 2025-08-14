@@ -37,30 +37,27 @@ class WorkflowViewer():
     def from_reference(cwl_file, workflow, entrypoint):
         return WorkflowViewer(cwl_file, workflow, entrypoint)
 
-    def display_inputs(self):
-        headers = ["Id", "Type", "Label", "Doc"]
-        md = "| " + " | ".join(headers) + " |\n"
-        md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
+    def _prepare_headers(self, headers: list[str]):
+        return f"| {' | '.join(headers)} |\n| {' | '.join(["---"] * len(headers))} |\n"
 
-        for inp in _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow).inputs:
-            md += f"| `{inp.id}` | `{type_to_string(inp.type_)}` | {inp.label} | {inp.doc} |\n"
+    def _display_parameters(self, parameters_name):
+        md = self._prepare_headers(["Id", "Type", "Label", "Doc"])
+
+        wf = _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow)
+
+        for p in getattr(wf, parameters_name, []):
+            md += f"| `{p.id}` | `{type_to_string(p.type_)}` | {p.label} | {p.doc} |\n"
         
         display(Markdown(md))
+
+    def display_inputs(self):
+        self._display_parameters('inputs')
 
     def display_outputs(self):
-        headers = ["Id", "Type", "Label", "Doc"]
-        md = "| " + " | ".join(headers) + " |\n"
-        md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
-
-        for out in _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow).outputs:
-            md += f"| `{out.id}` | `{type_to_string(out.type_)}` | {out.label} | {out.doc} |\n"
-        
-        display(Markdown(md))
+        self._display_parameters('outputs')
 
     def display_steps(self):
-        headers = ["Id", "Runs", "Label", "Doc"]
-        md = "| " + " | ".join(headers) + " |\n"
-        md += "| " + " | ".join(["---"] * len(headers)) + " |\n"
+        md = self._prepare_headers(["Id", "Runs", "Label", "Doc"])
 
         for step in _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow).steps:
             md += f"| `{step.id.replace(f'file:///#{self.entrypoint}/', '')}` | `{step.run}` | {step.label} | {step.doc} |\n"
