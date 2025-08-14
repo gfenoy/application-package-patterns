@@ -1,14 +1,24 @@
 
 import graphviz
 import yaml
+from cwl2puml import (
+    to_puml,
+    DiagramType
+)
 from cwltool.main import main as cwlmain
 from cwltool.context import LoadingContext, RuntimeContext
 from cwltool.executors import NoopJobExecutor
-from io import StringIO
+from io import (
+    StringIO,
+    BytesIO
+)
 from IPython.display import Markdown, display
 from cwl_utils.parser import load_document
 from eoap_cwlwrap import wrap
 from cwl_loader import load_cwl_from_location
+from PIL import Image
+from plantuml import deflate_and_encode
+from urllib.request import urlopen
 import cwl_utils
 
 def plot_cwl(cwl_file, entrypoint="main"):
@@ -81,6 +91,22 @@ class WorkflowViewer():
             md += f"| `{step.id.replace(f'file:///#{self.entrypoint}/', '')}` | {step.run} | {step.label} | {step.doc} |\n"
         
         display(Markdown(md))
+
+    def display_components_diagram(self):
+        out = StringIO()
+        to_puml(
+            cwl_document=self.workflow,
+            diagram_type=DiagramType.COMPONENTS,
+            output_stream=out
+        )
+
+        clear_output = out.getvalue()
+        encoded = deflate_and_encode(clear_output)
+        diagram_url = f"https://www.plantuml.com/plantuml/png/{encoded}"
+
+        with urlopen(diagram_url) as url:
+            img = Image.open(BytesIO(url.read()))
+        display(img)
 
     def plot(self):
         return graphviz.Source(plot_cwl(self.cwl_file, self.entrypoint))
