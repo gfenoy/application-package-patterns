@@ -25,12 +25,16 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "eoap-cwlwrap>=0.8.0",
+  "eoap-cwlwrap",
   "nose2", 
   "cwltool",
   "ipykernel",
   "graphviz",
   "cwl-utils",
+  "pillow",
+  "cwl-loader",
+  "plantuml",
+  "cwl2puml"
 ]
 
 [tool.hatch.metadata]
