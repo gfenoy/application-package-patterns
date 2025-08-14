@@ -22,6 +22,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-jupyter cwltool ipykernel graphviz pyyaml cwl-loader eoap-cwlwrap plantuml cwl2puml
+      - run: pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-jupyter cwltool ipykernel graphviz pillow cwl-loader eoap-cwlwrap plantuml cwl2puml
       - run: sudo apt update && sudo apt install -y graphviz wget
       - run: mkdocs gh-deploy --force
