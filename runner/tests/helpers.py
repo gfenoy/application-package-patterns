@@ -14,10 +14,13 @@ import unittest
 from cwltool.main import main as cwlmain
 from cwltool.context import LoadingContext, RuntimeContext
 from cwltool.executors import NoopJobExecutor
+from cwl_loader import (
+    load_cwl_from_location,
+    dump_cwl
+)
 from io import StringIO
 from click.testing import CliRunner
 from eoap_cwlwrap import wrap
-from eoap_cwlwrap.loader import ( load_workflow, dump_workflow )
 from pathlib import Path
 
 class TestCWL(unittest.TestCase):
@@ -54,10 +57,10 @@ class TestCWL(unittest.TestCase):
         return self.validate_cwl_file(app_cwl_file)
 
     def _wrapped_cwl_validation(self):
-        directory_stage_in = load_workflow(path=f"{self.base_url}/templates/stage-in.cwl")
-        file_stage_in = load_workflow(path=f"{self.base_url}/templates/stage-in-file.cwl")
-        workflows_cwl = load_workflow(path=f"{self.base_url}/cwl-workflow/{self.entrypoint}.cwl")
-        stage_out_cwl = load_workflow(path=f"{self.base_url}/templates/stage-out.cwl")
+        directory_stage_in = load_cwl_from_location(path=f"{self.base_url}/templates/stage-in.cwl")
+        file_stage_in = load_cwl_from_location(path=f"{self.base_url}/templates/stage-in-file.cwl")
+        workflows_cwl = load_cwl_from_location(path=f"{self.base_url}/cwl-workflow/{self.entrypoint}.cwl")
+        stage_out_cwl = load_cwl_from_location(path=f"{self.base_url}/templates/stage-out.cwl")
 
         main_workflow = wrap(
             directory_stage_in=directory_stage_in,
@@ -69,6 +72,6 @@ class TestCWL(unittest.TestCase):
 
         output_path = Path(self.output)
         with output_path.open("w") as f:
-            dump_workflow(main_workflow, output_path)
+            dump_cwl(main_workflow, output_path)
 
         self.assertEqual(self._cwl_validation(".wrapped.cwl"), 0)
