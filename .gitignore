@@ -13,3 +13,6 @@ build-test-Taskfile.yaml.*
 staged
 temp
 .pattern-*.cwl
+.project
+.pydevproject
+/.pytest_cache/
