@@ -24,4 +24,6 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-jupyter cwltool ipykernel graphviz pillow cwl-loader eoap-cwlwrap plantuml cwl2puml
       - run: sudo apt update && sudo apt install -y graphviz wget
+      - run: docker pull ghcr.io/eoap/mastering-app-package/stage:1.0.0
+      - run: docker pull ghcr.io/eoap/application-package-patterns/runner:0.2.0 
       - run: mkdocs gh-deploy --force
