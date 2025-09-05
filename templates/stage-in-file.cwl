@@ -24,6 +24,8 @@ arguments:
 - $( inputs.reference.value )
 - $( inputs.another_input ) # This is an additional input to demonstrate the use of multiple inputs
 requirements:
+  NetworkAccess:
+    networkAccess: true
   SchemaDefRequirement:
     types:
     - $import: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml
