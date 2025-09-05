@@ -1,6 +1,6 @@
 # ## 6. one input, no output
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - there are no output parameters of type `Directory`
 
@@ -13,8 +13,8 @@ import sys
 import click
 from loguru import logger
 import numpy as np
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, get_item)
+from runner.functions import aoi2box, crop, get_asset, normalized_difference, get_item
+
 
 @click.command(
     short_help="Vegetation index mean",
@@ -63,8 +63,10 @@ def pattern_6(item_url, aoi, epsg):
 
     # calculate the mean of the NDVI excluding NaN values
     logger.info("Calculating NDVI mean...")
-    mean = np.nanmean(normalized_difference(cropped_assets["nir08"], cropped_assets["red"]))
-  
+    mean = np.nanmean(
+        normalized_difference(cropped_assets["nir08"], cropped_assets["red"])
+    )
+
     sys.stdout.write(str(mean))
 
     logger.info("Done!")

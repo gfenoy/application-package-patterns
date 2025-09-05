@@ -15,6 +15,7 @@ import numpy as np
 
 np.seterr(divide="ignore", invalid="ignore")
 
+
 def get_item(item_url):
 
     if os.path.isdir(item_url):
@@ -24,6 +25,7 @@ def get_item(item_url):
         item = pystac.read_file(item_url)
 
     return item
+
 
 def crop(asset: pystac.Asset, bbox, epsg):
     """_summary_

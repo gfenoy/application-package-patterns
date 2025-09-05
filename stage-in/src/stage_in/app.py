@@ -13,10 +13,12 @@ from functools import wraps
 
 _original_init = aiohttp.TCPConnector.__init__
 
+
 @wraps(_original_init)
 def _patched_init(self, *args, **kwargs):
     kwargs["force_close"] = True
     _original_init(self, *args, **kwargs)
+
 
 aiohttp.TCPConnector.__init__ = _patched_init
 
@@ -48,17 +50,19 @@ async def main(href: str, output_dir: str):
 
     return cat
 
+
 @click.command()
 @click.argument("href")
 @click.option(
     "--output-dir",
     default=".",
     show_default=True,
-    help="Directory where the catalog will be saved"
+    help="Directory where the catalog will be saved",
 )
 def cli(href, output_dir):
     """Download STAC item and stage into a self-contained STAC catalog."""
     asyncio.run(main(href, output_dir))
+
 
 if __name__ == "__main__":
     cli()

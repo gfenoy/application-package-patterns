@@ -1,10 +1,10 @@
 # ## 9. one input, optional outputs
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - output parameter of type `Directory[]?`
 
-# This scenario takes as input an acquisition, applies an algorithm and may or may not generate outputs 
+# This scenario takes as input an acquisition, applies an algorithm and may or may not generate outputs
 
 import os
 import sys
@@ -14,8 +14,8 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, get_item)
+from runner.functions import aoi2box, crop, get_asset, normalized_difference, get_item
+
 
 @click.command(
     short_help="Vegetation index computation",
@@ -42,7 +42,7 @@ from runner.functions import (aoi2box, crop, get_asset,
 @click.option(
     "--vegetation-index",
     "vegetation_index",
-    type=click.Choice(['ndvi', 'ndwi', 'none']),
+    type=click.Choice(["ndvi", "ndwi", "none"]),
     help="Vegetation index to compute",
     required=True,
 )
@@ -73,14 +73,14 @@ def pattern_9(item_url, aoi, epsg, vegetation_index):
 
         cropped_assets[band] = out_image[0]
 
-    if vegetation_index == 'ndvi':
+    if vegetation_index == "ndvi":
         logger.info("Computing NDVI")
 
         # Compute NDVI using the NIR and red bands
         output = normalized_difference(cropped_assets["nir08"], cropped_assets["red"])
         name = "ndvi"
 
-    if vegetation_index == 'ndwi':
+    if vegetation_index == "ndwi":
         logger.info("Computing NDWI")
 
         # Compute NDWI using the green and NIR bands
@@ -102,7 +102,6 @@ def pattern_9(item_url, aoi, epsg, vegetation_index):
         logger.info(f"Write output {name}.tif")
         dst_dataset.write(output, indexes=1)
 
-
     cat = pystac.Catalog(id="catalog", description=f"{name} vegetation index")
 
     os.makedirs(name, exist_ok=True)
@@ -117,7 +116,7 @@ def pattern_9(item_url, aoi, epsg, vegetation_index):
         with_proj=True,
         with_raster=True,
     )
-    
+
     os.makedirs("./output", exist_ok=True)
 
     cat.add_items([out_item])

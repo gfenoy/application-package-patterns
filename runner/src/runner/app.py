@@ -14,14 +14,16 @@ from runner.crop import crop_cli
 from runner.ndi import ndi_cli
 from runner.otsu import otsu_cli
 
+
 @click.group()
 def app_group():
     pass
 
+
 patterns = [
     pattern_1,
     pattern_2,
-    pattern_3,      
+    pattern_3,
     pattern_4,
     pattern_5,
     pattern_6,
@@ -37,4 +39,3 @@ patterns = [
 
 for pattern in patterns:
     app_group.add_command(pattern)
-

@@ -1,10 +1,10 @@
 # ## 8. one input, optional output
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - one output parameter of type `Directory?`
 
-# This scenario takes as input an acquisition, applies an algorithm and may or may not generate and output 
+# This scenario takes as input an acquisition, applies an algorithm and may or may not generate and output
 
 # Implementation: detects water bodies using the Normalized Difference Water Index (NDWI) and Otsu thresholding.
 
@@ -16,8 +16,15 @@ import rasterio
 import pystac
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+from runner.functions import (
+    aoi2box,
+    crop,
+    get_asset,
+    normalized_difference,
+    threshold,
+    get_item,
+)
+
 
 @click.command(
     short_help="Water bodies detection",
@@ -48,10 +55,11 @@ from runner.functions import (aoi2box, crop, get_asset,
     required=True,
     multiple=True,
 )
-@click.option("--produce-output",
-              "produce_output",
-              help="Flag to produce the output",
-              is_flag=True,
+@click.option(
+    "--produce-output",
+    "produce_output",
+    help="Flag to produce the output",
+    is_flag=True,
 )
 def pattern_8(item_url, aoi, bands, epsg, produce_output):
 

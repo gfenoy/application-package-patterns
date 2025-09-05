@@ -1,16 +1,9 @@
-
 import graphviz
-from cwl2puml import (
-    to_puml,
-    DiagramType
-)
+from cwl2puml import to_puml, DiagramType
 from cwltool.main import main as cwlmain
 from cwltool.context import LoadingContext, RuntimeContext
 from cwltool.executors import NoopJobExecutor
-from io import (
-    StringIO,
-    BytesIO
-)
+from io import StringIO, BytesIO
 from IPython.display import Markdown, display
 from eoap_cwlwrap import _search_workflow, wrap
 from eoap_cwlwrap.types import type_to_string
@@ -20,19 +13,20 @@ from plantuml import deflate_and_encode
 from urllib.request import urlopen
 import cwl_utils
 
-class WorkflowViewer():
+
+class WorkflowViewer:
     def __init__(self, cwl_file, workflow, entrypoint):
         self.cwl_file = cwl_file
         self.workflow = workflow
         self.entrypoint = entrypoint
-        self.output = '.wrapped.cwl'
-        self.base_url = 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main'
+        self.output = ".wrapped.cwl"
+        self.base_url = "https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main"
 
     @staticmethod
     def from_file(cwl_file, entrypoint):
         workflow = load_cwl_from_location(path=cwl_file)
         return WorkflowViewer(cwl_file, workflow, entrypoint)
-    
+
     @staticmethod
     def from_reference(cwl_file, workflow, entrypoint):
         return WorkflowViewer(cwl_file, workflow, entrypoint)
@@ -47,21 +41,23 @@ class WorkflowViewer():
 
         for p in getattr(wf, parameters_name, []):
             md += f"| `{p.id}` | `{type_to_string(p.type_)}` | {p.label} | {p.doc} |\n"
-        
+
         display(Markdown(md))
 
     def display_inputs(self):
-        self._display_parameters('inputs')
+        self._display_parameters("inputs")
 
     def display_outputs(self):
-        self._display_parameters('outputs')
+        self._display_parameters("outputs")
 
     def display_steps(self):
         md = self._prepare_headers(["Id", "Runs", "Label", "Doc"])
 
-        for step in _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow).steps:
+        for step in _search_workflow(
+            workflow_id=self.entrypoint, workflow=self.workflow
+        ).steps:
             md += f"| `{step.id.replace(f'file:///#{self.entrypoint}/', '')}` | `{step.run}` | {step.label} | {step.doc} |\n"
-        
+
         display(Markdown(md))
 
     def display_components_diagram(self):
@@ -69,7 +65,7 @@ class WorkflowViewer():
         to_puml(
             cwl_document=self.workflow,
             diagram_type=DiagramType.COMPONENTS,
-            output_stream=out
+            output_stream=out,
         )
 
         clear_output = out.getvalue()
@@ -96,22 +92,29 @@ class WorkflowViewer():
         )
 
         return graphviz.Source(stream_out.getvalue())
-    
-class WorkflowWrapper():
+
+
+class WorkflowWrapper:
     def __init__(self, workflow, entrypoint):
         self.workflow = workflow
         self.entrypoint = entrypoint
-        self.base_url = 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main'
+        self.base_url = "https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop"
 
     def wrap(self):
-        directory_stage_in = load_cwl_from_location(path=f"{self.base_url}/templates/stage-in.cwl")
-        file_stage_in = load_cwl_from_location(path=f"{self.base_url}/templates/stage-in-file.cwl")
-        stage_out_cwl = load_cwl_from_location(path=f"{self.base_url}/templates/stage-out.cwl")
+        directory_stage_in = load_cwl_from_location(
+            path=f"{self.base_url}/templates/stage-in.cwl"
+        )
+        file_stage_in = load_cwl_from_location(
+            path=f"{self.base_url}/templates/stage-in-file.cwl"
+        )
+        stage_out_cwl = load_cwl_from_location(
+            path=f"{self.base_url}/templates/stage-out.cwl"
+        )
 
         return wrap(
             directory_stage_in=directory_stage_in,
             file_stage_in=file_stage_in,
             workflows=self.workflow,
             workflow_id=self.entrypoint,
-            stage_out=stage_out_cwl
+            stage_out=stage_out_cwl,
         )

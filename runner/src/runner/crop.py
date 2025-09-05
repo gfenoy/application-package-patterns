@@ -8,6 +8,7 @@ from loguru import logger
 import shutil
 import rio_stac
 
+
 @click.command(
     short_help="Crop",
     help="Crops a STAC Item asset defined with its common band name",
@@ -44,7 +45,9 @@ import rio_stac
 )
 def crop_cli(item_url, aoi, band, epsg, collection_url):
 
-    collection: pystac.Collection = pystac.read_file(collection_url) if collection_url else None
+    collection: pystac.Collection = (
+        pystac.read_file(collection_url) if collection_url else None
+    )
 
     item = get_item(item_url)
 
@@ -93,15 +96,14 @@ def crop_cli(item_url, aoi, band, epsg, collection_url):
             "assets": ["data"],
             "nodata": "0",
             "resampling": "nearest",
-			"rescale": [[0,3000]],
-			"colormap_name": "blues_r"
+            "rescale": [[0, 3000]],
+            "colormap_name": "blues_r",
         }
     }
 
     if collection:
         logger.info(f"Adding collection {collection.id} to the output item")
         out_item.collection_id = collection.id
-
 
     os.remove(cropped)
     cat.add_items([out_item])

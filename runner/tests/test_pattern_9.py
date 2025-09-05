@@ -11,6 +11,7 @@ If not, see <https://creativecommons.org/licenses/by-sa/4.0/>.
 import os
 from tests.helpers import TestCWL
 
+
 class TestPattern9(TestCWL):
 
     def setUp(self):
