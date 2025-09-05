@@ -18,3 +18,4 @@ temp
 /.pytest_cache/
 .venv
 site
+.params.yaml
