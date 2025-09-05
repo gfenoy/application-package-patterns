@@ -7,6 +7,7 @@ import rio_stac
 from loguru import logger
 from runner.functions import normalized_difference, get_item
 
+
 @click.command(
     short_help="Nomalized Difference Index CLI",
     help="Calculates the Normalized Difference Index (NDI) for two input bands.",
@@ -23,10 +24,7 @@ from runner.functions import normalized_difference, get_item
     help="Input item 2",
     required=True,
 )
-@click.option("--item", 
-              "ls9_item", 
-              help="Landsat STAC Item", 
-              required=True)
+@click.option("--item", "ls9_item", help="Landsat STAC Item", required=True)
 @click.option(
     "--collection",
     "collection_url",
@@ -35,7 +33,9 @@ from runner.functions import normalized_difference, get_item
 )
 def ndi_cli(item_1, item_2, ls9_item, collection_url):
 
-    collection: pystac.Collection = pystac.read_file(collection_url) if collection_url else None
+    collection: pystac.Collection = (
+        pystac.read_file(collection_url) if collection_url else None
+    )
 
     # read STAC Catalog
     item_1: pystac.Item = get_item(item_1)
@@ -54,7 +54,7 @@ def ndi_cli(item_1, item_2, ls9_item, collection_url):
 
     with rasterio.open(asset_2.get_absolute_href()) as src2:
         data2 = src2.read(1)
-    
+
     # calculate normalized difference
     ndi_data = normalized_difference(data1, data2)
 
@@ -76,7 +76,9 @@ def ndi_cli(item_1, item_2, ls9_item, collection_url):
         dst_dataset.write(ndi_data, indexes=1)
 
     logger.info("Creating a STAC Catalog")
-    cat = pystac.Catalog(id="catalog", description=f"Normalized difference from {ls9_item.id}")
+    cat = pystac.Catalog(
+        id="catalog", description=f"Normalized difference from {ls9_item.id}"
+    )
 
     output_item_id = f"ndi-{ls9_item.id}".lower()
 
@@ -100,11 +102,10 @@ def ndi_cli(item_1, item_2, ls9_item, collection_url):
             "assets": ["data"],
             "nodata": "0",
             "resampling": "nearest",
-			"rescale": [[-1,1]],
-			"colormap_name": "blues_r"
+            "rescale": [[-1, 1]],
+            "colormap_name": "blues_r",
         }
     }
-
 
     if collection:
         logger.info(f"Adding collection {collection.id} to the output item")

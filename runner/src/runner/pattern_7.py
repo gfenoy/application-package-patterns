@@ -1,6 +1,6 @@
 # ## 7. optional inputs, one output
 
-# The CWL includes: 
+# The CWL includes:
 # - one optional input parameter of type `Directory?`
 # - one output parameter of type `Directory`
 
@@ -15,8 +15,15 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+from runner.functions import (
+    aoi2box,
+    crop,
+    get_asset,
+    normalized_difference,
+    threshold,
+    get_item,
+)
+
 
 @click.command(
     short_help="Water bodies detection",
@@ -55,7 +62,7 @@ from runner.functions import (aoi2box, crop, get_asset,
     multiple=True,
 )
 def pattern_7(item_url_1, item_url_2, aoi, bands, epsg):
-    
+
     logger.info("Creating a STAC Catalog")
     cat = pystac.Catalog(id="catalog", description="water-bodies")
 
@@ -105,7 +112,6 @@ def pattern_7(item_url_1, item_url_2, aoi, bands, epsg):
         with rasterio.open(water_body, "w", **out_meta) as dst_dataset:
             logger.info("Write otsu.tif")
             dst_dataset.write(water_bodies, indexes=1)
-   
 
         if os.path.isdir(item_url):
             catalog = pystac.read_file(os.path.join(item_url, "catalog.json"))
@@ -115,7 +121,6 @@ def pattern_7(item_url_1, item_url_2, aoi, bands, epsg):
 
         os.makedirs(item.id, exist_ok=True)
         shutil.copy(water_body, item.id)
-        
 
         out_item = rio_stac.stac.create_stac_item(
             source=water_body,

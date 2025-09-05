@@ -17,10 +17,7 @@ from runner.functions import threshold, get_item
     "item_ndi",
     help="Normalized Difference Index (NDI) STAC catalog",
 )
-@click.option("--item", 
-              "ls9_item", 
-              help="Landsat STAC Item", 
-              required=True)
+@click.option("--item", "ls9_item", help="Landsat STAC Item", required=True)
 @click.option(
     "--collection",
     "collection_url",
@@ -32,7 +29,9 @@ def otsu_cli(item_ndi, ls9_item, collection_url):
     Detects water bodies using the Otsu thresholding method on the NDI.
     """
 
-    collection: pystac.Collection = pystac.read_file(collection_url) if collection_url else None
+    collection: pystac.Collection = (
+        pystac.read_file(collection_url) if collection_url else None
+    )
 
     # read STAC Catalog
     item_ndi: pystac.Item = get_item(item_ndi)
@@ -71,7 +70,9 @@ def otsu_cli(item_ndi, ls9_item, collection_url):
     logger.info(f"Otsu output written to {otsu}")
 
     logger.info("Creating a STAC Catalog")
-    cat = pystac.Catalog(id="catalog", description=f"Detected water bodies from {ls9_item.id}")
+    cat = pystac.Catalog(
+        id="catalog", description=f"Detected water bodies from {ls9_item.id}"
+    )
 
     output_item_id = f"water-body-{ls9_item.id}".lower()
 
@@ -94,9 +95,9 @@ def otsu_cli(item_ndi, ls9_item, collection_url):
             "assets": ["data"],
             "nodata": 0,
             "colormap": {
-                "1": "0000FF",       
+                "1": "0000FF",
             },
-            "resampling": "nearest"
+            "resampling": "nearest",
         }
     }
 
@@ -106,7 +107,7 @@ def otsu_cli(item_ndi, ls9_item, collection_url):
 
     os.remove(otsu)
     cat.add_items([out_item])
-    
+
     cat.normalize_and_save(
         root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )

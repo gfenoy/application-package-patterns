@@ -1,6 +1,6 @@
 # # one input/one output
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - one output parameter of type `Directory`
 
@@ -16,8 +16,15 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+from runner.functions import (
+    aoi2box,
+    crop,
+    get_asset,
+    normalized_difference,
+    threshold,
+    get_item,
+)
+
 
 @click.command(
     short_help="Water bodies detection",
@@ -78,7 +85,6 @@ def pattern_11(item_url, aoi, bands, epsg, dem):
 
         cropped_assets[band] = out_image[0]
 
-
     nd = normalized_difference(cropped_assets[bands[0]], cropped_assets[bands[1]])
 
     water_bodies = threshold(nd)
@@ -100,7 +106,6 @@ def pattern_11(item_url, aoi, bands, epsg, dem):
         logger.info("Write otsu.tif")
         dst_dataset.write(water_bodies, indexes=1)
 
-    
     if os.path.isdir(item_url):
         catalog = pystac.read_file(os.path.join(item_url, "catalog.json"))
         item = next(catalog.get_items())

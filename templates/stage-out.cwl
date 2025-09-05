@@ -48,6 +48,8 @@ arguments:
     } 
   
 requirements:
+  NetworkAccess:
+    networkAccess: true
   SchemaDefRequirement:
     types:
     - $import: https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml
@@ -113,39 +115,39 @@ requirements:
                       super().write_text(dest, txt, *args, **kwargs)
 
 
-          client = boto3.client(
-              "s3",
-              aws_access_key_id=aws_access_key_id,
-              aws_secret_access_key=aws_secret_access_key,
-              endpoint_url=endpoint_url,
-              region_name=region_name,
-          )
+          # client = boto3.client(
+          #     "s3",
+          #     aws_access_key_id=aws_access_key_id,
+          #     aws_secret_access_key=aws_secret_access_key,
+          #     endpoint_url=endpoint_url,
+          #     region_name=region_name,
+          # )
 
-          StacIO.set_default(CustomStacIO)
+          # StacIO.set_default(CustomStacIO)
 
-          for item in cat.get_items():
-              for key, asset in item.get_assets().items():
-                  s3_path = os.path.normpath(
-                      os.path.join(os.path.join(subfolder, item.id, asset.href))
-                  )
-                  print(f"upload {asset.href} to s3://{bucket}/{s3_path}",file=sys.stderr)
-                  client.upload_file(
-                      asset.get_absolute_href(),
-                      bucket,
-                      s3_path,
-                  )
-                  asset.href = f"s3://{bucket}/{s3_path}"
-                  item.add_asset(key, asset)
+          # for item in cat.get_items():
+          #     for key, asset in item.get_assets().items():
+          #         s3_path = os.path.normpath(
+          #             os.path.join(os.path.join(subfolder, item.id, asset.href))
+          #         )
+          #         print(f"upload {asset.href} to s3://{bucket}/{s3_path}",file=sys.stderr)
+          #         client.upload_file(
+          #             asset.get_absolute_href(),
+          #             bucket,
+          #             s3_path,
+          #         )
+          #         asset.href = f"s3://{bucket}/{s3_path}"
+          #         item.add_asset(key, asset)
 
-          cat.normalize_hrefs(f"s3://{bucket}/{subfolder}")
+          # cat.normalize_hrefs(f"s3://{bucket}/{subfolder}")
 
-          for item in cat.get_items():
-              # upload item to S3
-              print(f"upload {item.id} to s3://{bucket}/{subfolder}", file=sys.stderr)
-              pystac.write_file(item, item.get_self_href())
+          # for item in cat.get_items():
+          #     # upload item to S3
+          #     print(f"upload {item.id} to s3://{bucket}/{subfolder}", file=sys.stderr)
+          #     pystac.write_file(item, item.get_self_href())
 
-          # upload catalog to S3
-          print(f"upload catalog.json to s3://{bucket}/{subfolder}", file=sys.stderr)
-          pystac.write_file(cat, cat.get_self_href())
+          # # upload catalog to S3
+          # print(f"upload catalog.json to s3://{bucket}/{subfolder}", file=sys.stderr)
+          # pystac.write_file(cat, cat.get_self_href())
 
           print(f"s3://{bucket}/{subfolder}/catalog.json", end="", file=sys.stdout)

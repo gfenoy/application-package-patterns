@@ -71,7 +71,7 @@ $graph:
           ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: docker.io/library/runner:latest
+        dockerPull: ghcr.io/eoap/application-package-patterns/runner:0.2.0
     baseCommand:
     - runner
     arguments:

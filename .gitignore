@@ -17,3 +17,5 @@ temp
 .pydevproject
 /.pytest_cache/
 .venv
+site
+.params.yaml

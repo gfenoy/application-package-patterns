@@ -1,6 +1,6 @@
 # ## one input/two outputs
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - two output parameters of type `Directory`
 
@@ -15,8 +15,8 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, get_item)
+from runner.functions import aoi2box, crop, get_asset, normalized_difference, get_item
+
 
 @click.command(
     short_help="NDVI and NDWI vegetation indexes",
@@ -83,12 +83,9 @@ def pattern_4(item_url, aoi, epsg):
             logger.info(f"Write output {name}.tif")
             dst_dataset.write(output, indexes=1)
 
-
         cat = pystac.Catalog(id="catalog", description=f"{name} vegetation index")
 
         os.makedirs(name, exist_ok=True)
-       
-        
 
         out_item = rio_stac.stac.create_stac_item(
             source=f"{name}.tif",
@@ -100,7 +97,7 @@ def pattern_4(item_url, aoi, epsg):
             with_proj=True,
             with_raster=True,
         )
-        
+
         cat.add_items([out_item])
 
         cat.normalize_and_save(

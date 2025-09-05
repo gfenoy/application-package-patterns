@@ -1,6 +1,6 @@
 # # one input/one output
 
-# The CWL includes: 
+# The CWL includes:
 # - one input parameter of type `Directory`
 # - one output parameter of type `Directory`
 
@@ -16,8 +16,15 @@ import rasterio
 from loguru import logger
 import shutil
 import rio_stac
-from runner.functions import (aoi2box, crop, get_asset,
-    normalized_difference, threshold, get_item)
+from runner.functions import (
+    aoi2box,
+    crop,
+    get_asset,
+    normalized_difference,
+    threshold,
+    get_item,
+)
+
 
 @click.command(
     short_help="Water bodies detection",
@@ -121,9 +128,9 @@ def pattern_1(item_url, aoi, bands, epsg):
             "assets": ["data"],
             "nodata": 0,
             "colormap": {
-                "1": "0000FF",       
+                "1": "0000FF",
             },
-            "resampling": "nearest"
+            "resampling": "nearest",
         }
     }
 
