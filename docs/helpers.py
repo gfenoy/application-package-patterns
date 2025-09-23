@@ -6,9 +6,10 @@ from cwltool.context import LoadingContext, RuntimeContext
 from cwltool.executors import NoopJobExecutor
 from io import StringIO, BytesIO
 from IPython.display import Markdown, display
-from eoap_cwlwrap import _search_workflow, wrap
+from eoap_cwlwrap import wrap
 from eoap_cwlwrap.types import type_to_string
 from cwl_loader import load_cwl_from_location
+from cwl_loader.utils import search_process
 from PIL import Image
 from plantuml import deflate_and_encode
 from urllib.request import urlopen
@@ -39,7 +40,7 @@ class WorkflowViewer:
     def _display_parameters(self, parameters_name):
         md = self._prepare_headers(["Id", "Type", "Label", "Doc"])
 
-        wf = _search_workflow(workflow_id=self.entrypoint, workflow=self.workflow)
+        wf = search_process(process_id=self.entrypoint, process=self.workflow)
 
         for p in getattr(wf, parameters_name, []):
             md += f"| `{p.id}` | `{type_to_string(p.type_)}` | {p.label} | {p.doc} |\n"
@@ -55,8 +56,8 @@ class WorkflowViewer:
     def display_steps(self):
         md = self._prepare_headers(["Id", "Runs", "Label", "Doc"])
 
-        for step in _search_workflow(
-            workflow_id=self.entrypoint, workflow=self.workflow
+        for step in search_process(
+            process_id=self.entrypoint, process=self.workflow
         ).steps:
             md += f"| `{step.id.replace(f'file:///#{self.entrypoint}/', '')}` | `{step.run}` | {step.label} | {step.doc} |\n"
 
@@ -66,7 +67,7 @@ class WorkflowViewer:
         out = StringIO()
         to_puml(
             cwl_document=self.workflow,
-            diagram_type=DiagramType.COMPONENTS,
+            diagram_type=DiagramType.COMPONENT,
             output_stream=out,
         )
 
