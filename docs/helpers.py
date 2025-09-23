@@ -17,6 +17,10 @@ import cwl_loader
 cwl_loader.logger.remove()
 cwl_loader.logger.add(sys.stderr, level="INFO")
 
+import eoap_cwlwrap
+eoap_cwlwrap.logger.remove()
+#eoap_cwlwrap.logger.add(sys.stderr, level="INFO")
+
 class WorkflowViewer:
     def __init__(self, cwl_file, workflow, entrypoint):
         self.cwl_file = cwl_file
