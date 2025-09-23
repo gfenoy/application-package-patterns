@@ -1,3 +1,4 @@
+import sys
 import graphviz
 from cwl2puml import to_puml, DiagramType
 from cwltool.main import main as cwlmain
@@ -11,8 +12,9 @@ from cwl_loader import load_cwl_from_location
 from PIL import Image
 from plantuml import deflate_and_encode
 from urllib.request import urlopen
-import cwl_utils
-
+import cwl_loader
+cwl_loader.logger.remove()
+cwl_loader.logger.add(sys.stderr, level="INFO")
 
 class WorkflowViewer:
     def __init__(self, cwl_file, workflow, entrypoint):
