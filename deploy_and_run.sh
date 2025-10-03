@@ -384,10 +384,6 @@ main() {
     print_status "Workflows executed: ${#executed_workflows[@]}"
     print_status "Processes deleted: ${#deleted_processes[@]}"
     
-    if [[ ${#failed_downloads[@]} -gt 0 ]]; then
-        print_warning "Download failures: ${failed_downloads[*]}"
-    fi
-    
     if [[ ${#failed_deployments[@]} -gt 0 ]]; then
         print_warning "Deployment failures: ${failed_deployments[*]}"
     fi
