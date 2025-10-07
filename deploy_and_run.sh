@@ -169,7 +169,11 @@ execute_workflow() {
                     sleep 10  # Wait before checking again
                     status=$(get_job_status_silent "$job_id")
                 done
-                print_success "Job finished with status: $status"
+                if [[ "$status" == "successful" ]]; then
+                    print_success "Job $job_id completed successfully"
+                else
+                    print_error "Job $job_id ended with status: $status"
+                fi
             fi
             
             return 0
@@ -379,9 +383,8 @@ main() {
     echo
     print_status "=== SUMMARY ==="
     echo
-    print_status "Files downloaded: ${#downloaded_files[@]}"
-    print_status "Files deployed: ${#deployed_files[@]}"
-    print_status "Workflows executed: ${#executed_workflows[@]}"
+    print_status "Application packages deployed: ${#deployed_files[@]}"
+    print_status "Processes executed: ${#executed_workflows[@]}"
     print_status "Processes deleted: ${#deleted_processes[@]}"
     
     if [[ ${#failed_deployments[@]} -gt 0 ]]; then
